@@ -365,7 +365,7 @@ public class MainActivityDrawer extends AppCompatActivity {
                     Intent loginIntent = new Intent(MainActivityDrawer.this, LoginActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
-
+                    closeapp();
                 }
                 else {
 
@@ -572,35 +572,37 @@ public class MainActivityDrawer extends AppCompatActivity {
 
     }
 
+   public  void closeapp(){
+       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+       alertDialogBuilder.setMessage("Are you sure you want to close App?");
+       alertDialogBuilder.setPositiveButton("Yes",
+               new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface arg0, int arg1) {
 
+                       finish();
+                   }
+               });
+
+       alertDialogBuilder.setNegativeButton("No",
+               new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface arg0, int arg1) {
+
+                   }
+               });
+
+       //Showing the alert dialog
+       AlertDialog alertDialog = alertDialogBuilder.create();
+       alertDialog.show();
+   }
 
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch(keyCode){
             case KeyEvent.KEYCODE_BACK:
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("Are you sure you want to close App?");
-                alertDialogBuilder.setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-
-                                finish();
-                            }
-                        });
-
-                alertDialogBuilder.setNegativeButton("No",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-
-                            }
-                        });
-
-                //Showing the alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                closeapp();
                 return true;
         }
         return super.onKeyDown(keyCode, event);
