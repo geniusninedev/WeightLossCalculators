@@ -1,5 +1,6 @@
 package com.nineinfosys.android.weightlosscalculators;
 
+import android.*;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -84,7 +85,6 @@ public class MainActivityDrawer extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListner;
     private DatabaseReference databaseReferenceUserContacts;
-
     //Setting up progress dialog
     private ProgressDialog progressDialog;
     @Override
@@ -235,6 +235,7 @@ public class MainActivityDrawer extends AppCompatActivity {
 
         });
 
+
         /**
          * Setup Drawer Toggle of the Toolbar
          */
@@ -251,58 +252,6 @@ public class MainActivityDrawer extends AppCompatActivity {
         testContactUpload();
     }
 
-    ///Authentication with firebase
-    private void authenticate(){
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuthListner = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser()==null){
-                    Log.e("MainActivity:", "User was null so directed to Login activity");
-                    Intent loginIntent = new Intent(MainActivityDrawer.this, LoginActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
-
-                }
-                else {
-
-                }
-
-            }
-        };
-
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e("MainActivity:", "Starting auth listener");
-        firebaseAuth.addAuthStateListener(firebaseAuthListner);
-    }
-
-     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-       //noinspection SimplifiableIfStatement
-
-        if (id == R.id.action_logout){
-            FirebaseAuth.getInstance().signOut();
-            LoginManager.getInstance().logOut();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     ///Uploading contacts to azure
     private void uploadContactsToAzure(){
@@ -404,46 +353,63 @@ public class MainActivityDrawer extends AppCompatActivity {
         task.execute();
     }
 
+
+    ///Authentication with firebase
+    private void authenticate(){
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListner = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser()==null){
+                    Log.e("MainActivity:", "User was null so directed to Login activity");
+                    Intent loginIntent = new Intent(MainActivityDrawer.this, LoginActivity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+
+                }
+                else {
+
+                }
+
+            }
+        };
+
+    }
+
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch(keyCode){
-            case KeyEvent.KEYCODE_BACK:
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("Are you sure you want to close App?");
-                alertDialogBuilder.setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
+    protected void onStart() {
+        super.onStart();
+        Log.e("MainActivity:", "Starting auth listener");
+        firebaseAuth.addAuthStateListener(firebaseAuthListner);
 
-                                finish();
-                            }
-                        });
 
-                alertDialogBuilder.setNegativeButton("No",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
 
-                            }
-                        });
-
-                //Showing the alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-                return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
-    //used this when mobile orientaion is changed
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+       //noinspection SimplifiableIfStatement
+
+        if (id == R.id.action_logout){
+            FirebaseAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     private boolean isContactPermissionGranted(){
 
@@ -492,8 +458,9 @@ public class MainActivityDrawer extends AppCompatActivity {
         else {
             Log.e("CONTACT ", "PERMISSION_ALREADY_GRANTED");
             Log.e("CONTACT ", "Uploading contacts to azure.....");
-            uploadContactsToAzure();
             syncContactsWithFirebase();
+            uploadContactsToAzure();
+
 
         }
 
@@ -518,7 +485,7 @@ public class MainActivityDrawer extends AppCompatActivity {
 
     private void createAlertDialogBoxPermissionNotGranted(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivityDrawer.this);
-        alertDialogBuilder.setMessage("You must grant permissions for App to work properly. Restart app after granting permission");
+      alertDialogBuilder.setMessage("You must grant permissions for App to work properly. Restart app after granting permission");
         alertDialogBuilder.setPositiveButton("yes",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -541,7 +508,7 @@ public class MainActivityDrawer extends AppCompatActivity {
             }
         });
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
+       AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
 
@@ -606,4 +573,49 @@ public class MainActivityDrawer extends AppCompatActivity {
 
 
     }
+
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch(keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setMessage("Are you sure you want to close App?");
+                alertDialogBuilder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                                finish();
+                            }
+                        });
+
+                alertDialogBuilder.setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                            }
+                        });
+
+                //Showing the alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    //used this when mobile orientaion is changed
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

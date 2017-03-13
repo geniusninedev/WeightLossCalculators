@@ -279,11 +279,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "991786302088-c0a9f10q5af4kohrr62o4uqhi0ae40ot.apps.googleusercontent.com",
+          "client_id": "991786302088-ff8id216lgamuv60auvhtrotrvem2j5j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.nineinfosys.android.weightlosscalculators",
-            "certificate_hash": "0d33c54e7135e916390fc7b956541364f699fa2e"
+            "certificate_hash": "55f4bf89d0f70ba18d01ede5814e5824d57779aa"
           }
         },
         {
