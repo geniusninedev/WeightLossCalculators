@@ -177,16 +177,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        System.exit(0); //kill the app
-
-    }
-
-    @Override
-    public void onBackPressed() { //here I capture the event onBackPress
-        super.onBackPressed();
-        onStop(); //call onStop
+    public void onBackPressed() {
+        finish();
     }
 
     private void updateUserProfile()

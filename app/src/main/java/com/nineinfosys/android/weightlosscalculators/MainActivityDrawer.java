@@ -369,6 +369,7 @@ public class MainActivityDrawer extends AppCompatActivity {
                 }
                 else {
 
+
                 }
 
             }
@@ -381,9 +382,6 @@ public class MainActivityDrawer extends AppCompatActivity {
         super.onStart();
         Log.e("MainActivity:", "Starting auth listener");
         firebaseAuth.addAuthStateListener(firebaseAuthListner);
-
-
-
     }
 
     @Override
