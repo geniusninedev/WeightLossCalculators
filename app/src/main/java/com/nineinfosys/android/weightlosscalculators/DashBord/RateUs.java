@@ -46,7 +46,21 @@ public class RateUs extends Fragment {
         View v = inflater.inflate(R.layout.activity_rate_us, null);
         ((MainActivityDrawer) getActivity()).toolbar.setTitle("Rate Us and Leave Feedback");
 
-
+        editTextdevice = (EditText)v.findViewById(R.id.editTextDevice);
+        editTextOS = (EditText)v.findViewById(R.id.editTextOS);
+        editTextApplication = (EditText)v.findViewById(R.id.editTextApplication);
+        editTextIndustry = (EditText)v.findViewById(R.id.editTextIndustry);
+        editTextAppDescription = (EditText)v.findViewById(R.id.editTextAppDescription);
+        editTextPhoneNumber = (EditText)v.findViewById(R.id.editTextContactPhoneNumber);
+        editTextContactEmail = (EditText)v.findViewById(R.id.editTextContactEmail);
+        buttonGetQuote = (Button)v.findViewById(R.id.buttonGetQuote);
+        buttonGetQuote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initializeAzureTable();
+                uploadOrder();
+            }
+        });
 
 
         return v;
