@@ -1,5 +1,6 @@
 package com.nineinfosys.android.weightlosscalculators.DashBord;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,7 +46,10 @@ public class DashBord extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = links.get(position);
-                Toast.makeText(getActivity(), item, Toast.LENGTH_LONG).show();
+                Intent news = new Intent(getActivity(), ShowFeeds.class);
+                news.putExtra("url", item) ;
+                startActivity(news);
+               // Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -65,7 +69,7 @@ public class DashBord extends Fragment {
                 try{
                     /////////////////////////////////////////////////
                     try {
-                        URL url = new URL("https://beta1.esakal.com/c03_feeds.xml");
+                        URL url = new URL("http://www.womenshealthandfitness.com.au/component/obrss/weight-loss");
                         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                         factory.setNamespaceAware(false);
                         final XmlPullParser xpp = factory.newPullParser();

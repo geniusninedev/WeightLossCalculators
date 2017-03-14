@@ -57,6 +57,8 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivityDrawer" />
         </activity>
+        <activity android:name=".DashBord.ShowFeeds"
+            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
     </application>
 
 </manifest>
