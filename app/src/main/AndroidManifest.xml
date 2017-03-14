@@ -49,8 +49,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity"></activity>
-        <activity android:name=".DashBord.RateUs">
+        <activity android:name=".Login.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
+        <activity android:name=".DashBord.GetApp"
+            android:configChanges="orientation|screenSize|keyboardHidden">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivityDrawer" />

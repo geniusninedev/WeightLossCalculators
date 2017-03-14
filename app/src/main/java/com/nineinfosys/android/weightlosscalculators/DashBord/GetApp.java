@@ -1,16 +1,15 @@
 package com.nineinfosys.android.weightlosscalculators.DashBord;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Dev on 12-01-2017.
  */
 
-public class RateUs extends AppCompatActivity{
+public class GetApp extends AppCompatActivity{
     private OrderApp orderApp;
     private EditText editTextdevice;
     private EditText editTextOS;
@@ -104,7 +103,7 @@ public class RateUs extends AppCompatActivity{
         try {
             mobileServiceClientOrderApp = new MobileServiceClient(
                     getString(R.string.web_address),
-                  RateUs.this);
+                  GetApp.this);
             mobileServiceClientOrderApp.setAndroidHttpClientFactory(new OkHttpClientFactory() {
                 @Override
                 public OkHttpClient createOkHttpClient() {
@@ -146,7 +145,7 @@ public class RateUs extends AppCompatActivity{
             editTextPhoneNumber.setText("");
             editTextContactEmail.setText("");
 
-            Toast.makeText(RateUs.this, "Submitted", Toast.LENGTH_LONG).show();
+            Toast.makeText(GetApp.this, "Submitted", Toast.LENGTH_LONG).show();
         }
         catch (Exception e){
             Log.e("feedback ", e.toString());
@@ -167,5 +166,25 @@ public class RateUs extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch(keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                Intent intent=new Intent(GetApp.this,MainActivityDrawer.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    //used this when mobile orientaion is changed
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
     }
 }

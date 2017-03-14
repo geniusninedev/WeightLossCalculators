@@ -1,6 +1,5 @@
 package com.nineinfosys.android.weightlosscalculators;
 
-import android.*;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -46,7 +45,7 @@ import com.nineinfosys.android.weightlosscalculators.BodyFat.BodyFatFragment;
 import com.nineinfosys.android.weightlosscalculators.Calorie.CalorieFragment;
 import com.nineinfosys.android.weightlosscalculators.Carbohydrate.CarbohydrateFragment;
 import com.nineinfosys.android.weightlosscalculators.DashBord.DashBord;
-import com.nineinfosys.android.weightlosscalculators.DashBord.RateUs;
+import com.nineinfosys.android.weightlosscalculators.DashBord.GetApp;
 import com.nineinfosys.android.weightlosscalculators.FAT.FATFragment;
 import com.nineinfosys.android.weightlosscalculators.FatIntake.FatIntakeFragment;
 import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
@@ -261,8 +260,8 @@ public class MainActivityDrawer extends AppCompatActivity {
                 }
                 if (menuItem.getItemId() == R.id.GetApps) {
                 /*    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new RateUs()).commit();*/
-                    Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.DashBord.RateUs.class);
+                    fragmentTransaction.replace(R.id.containerView, new GetApp()).commit();*/
+                    Intent intent=new Intent(MainActivityDrawer.this, GetApp.class);
                     startActivity(intent);
 
                 }
