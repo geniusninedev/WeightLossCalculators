@@ -46,6 +46,7 @@ import com.nineinfosys.android.weightlosscalculators.BodyFat.BodyFatFragment;
 import com.nineinfosys.android.weightlosscalculators.Calorie.CalorieFragment;
 import com.nineinfosys.android.weightlosscalculators.Carbohydrate.CarbohydrateFragment;
 import com.nineinfosys.android.weightlosscalculators.DashBord.DashBord;
+import com.nineinfosys.android.weightlosscalculators.DashBord.RateUs;
 import com.nineinfosys.android.weightlosscalculators.FAT.FATFragment;
 import com.nineinfosys.android.weightlosscalculators.FatIntake.FatIntakeFragment;
 import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
@@ -225,10 +226,42 @@ public class MainActivityDrawer extends AppCompatActivity {
                     startActivity(intent);*/
                 }
                 if (menuItem.getItemId() == R.id.MoreApps) {
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=GeniusNine+Info+Systems+LLP"));
-                    startActivity(intent);
+
+                    //Sunile Sir Code
+                    final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://developer?id=GeniusNine+Info+Systems+LLP" )));
+                    } catch (android.content.ActivityNotFoundException anfe) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=GeniusNine+Info+Systems+LLP" )));
+                    }
+
+                    //Pravin  Code
+                   /* intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=GeniusNine+Info+Systems+LLP"));
+                    startActivity(intent);*/
                     /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Weight.MainActivity.class);
                     startActivity(intent);*/
+                }
+
+                if (menuItem.getItemId() == R.id.Share) {
+                    final String appPackageName = getPackageName();
+                    Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    String shareBodyText = "https://play.google.com/store/apps/details?id=" + appPackageName ;
+                    intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject/Title");
+                    intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                    startActivity(Intent.createChooser(intent, "Choose sharing method"));
+                }
+                if (menuItem.getItemId() == R.id.RateUs) {
+                    final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                    } catch (android.content.ActivityNotFoundException anfe) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                    }
+                }
+                if (menuItem.getItemId() == R.id.GetApps) {
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerView, new RateUs()).commit();
                 }
                 return false;
             }
