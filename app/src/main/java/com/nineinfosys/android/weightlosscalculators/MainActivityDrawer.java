@@ -436,6 +436,7 @@ public class MainActivityDrawer extends AppCompatActivity {
        //noinspection SimplifiableIfStatement
 
         if (id == R.id.action_logout){
+
             FirebaseAuth.getInstance().signOut();
             LoginManager.getInstance().logOut();
         }

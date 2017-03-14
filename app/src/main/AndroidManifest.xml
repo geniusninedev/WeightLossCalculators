@@ -50,7 +50,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login.LoginActivity"></activity>
-        <activity android:name=".DashBord.RateUs"></activity>
+        <activity android:name=".DashBord.RateUs">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivityDrawer" />
+        </activity>
     </application>
 
 </manifest>

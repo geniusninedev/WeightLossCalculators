@@ -8,11 +8,18 @@
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <TextView
             android:text="Get your cutomized app"
             android:layout_width="match_parent"
@@ -94,5 +101,7 @@
             android:id="@+id/buttonGetQuote"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimaryDark" />
+            </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

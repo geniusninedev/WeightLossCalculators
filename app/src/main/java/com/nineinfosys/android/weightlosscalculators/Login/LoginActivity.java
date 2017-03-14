@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -155,5 +156,6 @@ public class LoginActivity extends AppCompatActivity {
         Log.e("LoginActivity:", "On activity result called");
         // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        facebookLoginButton.setVisibility(View.GONE);
     }
 }

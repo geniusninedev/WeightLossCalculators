@@ -3,7 +3,9 @@ package com.nineinfosys.android.weightlosscalculators.DashBord;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -29,7 +31,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Dev on 12-01-2017.
  */
 
-public class RateUs extends AppCompatActivity {
+public class RateUs extends AppCompatActivity{
     private OrderApp orderApp;
     private EditText editTextdevice;
     private EditText editTextOS;
@@ -47,12 +49,13 @@ public class RateUs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawermain);
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.app_bar);
+        setContentView(R.layout.activity_rate_us);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        toolbar.setTitle("Rate Us");
+        getSupportActionBar().setTitle("Rate Us");
+
 
         editTextdevice = (EditText)findViewById(R.id.editTextDevice);
         editTextOS = (EditText)findViewById(R.id.editTextOS);
