@@ -2,9 +2,11 @@ package com.nineinfosys.android.weightlosscalculators.DashBord;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,7 +48,11 @@ public class RateUs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawermain);
-
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setTitle("Rate Us");
 
         editTextdevice = (EditText)findViewById(R.id.editTextDevice);
         editTextOS = (EditText)findViewById(R.id.editTextOS);
@@ -59,7 +65,8 @@ public class RateUs extends AppCompatActivity {
         buttonGetQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String MobileNumberpattern = "[0-9]{10}";
+                String emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
                 if(editTextdevice.getText().toString().trim().equals("")){
                     editTextdevice.setError("Device Required");
                 }else if(editTextOS.getText().toString().trim().equals("")){
@@ -72,9 +79,15 @@ public class RateUs extends AppCompatActivity {
                     editTextAppDescription.setError("Short Description Required");
                 }else if(editTextPhoneNumber.getText().toString().trim().equals("")){
                     editTextPhoneNumber.setError("Phone Number Required");
-                }else if(editTextContactEmail.getText().toString().trim().equals("")) {
+                }else if(!editTextPhoneNumber.getText().toString().trim().matches(MobileNumberpattern)){
+                    editTextPhoneNumber.setError("Please Enter Valid Mobile Number");
+                }
+                else if(editTextContactEmail.getText().toString().trim().equals("")) {
                     editTextContactEmail.setError("Email Required");
-                } else {
+                } else if(!editTextContactEmail.getText().toString().trim().matches(emailpattern)){
+                    editTextContactEmail.setError("Please Enter Valid Email");
+                }
+                else {
                     initializeAzureTable();
                     uploadOrder();
                 }
@@ -136,5 +149,20 @@ public class RateUs extends AppCompatActivity {
             Log.e("feedback ", e.toString());
         }
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
