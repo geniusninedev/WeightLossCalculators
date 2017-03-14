@@ -260,8 +260,11 @@ public class MainActivityDrawer extends AppCompatActivity {
                     }
                 }
                 if (menuItem.getItemId() == R.id.GetApps) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new RateUs()).commit();
+                /*    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerView, new RateUs()).commit();*/
+                    Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.DashBord.RateUs.class);
+                    startActivity(intent);
+
                 }
                 return false;
             }

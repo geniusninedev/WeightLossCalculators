@@ -2,6 +2,7 @@ package com.nineinfosys.android.weightlosscalculators.DashBord;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Dev on 12-01-2017.
  */
 
-public class RateUs extends Fragment {
+public class RateUs extends AppCompatActivity {
     private OrderApp orderApp;
     private EditText editTextdevice;
     private EditText editTextOS;
@@ -42,34 +43,52 @@ public class RateUs extends Fragment {
     private MobileServiceTable<OrderApp> mobileServiceTableOrderApp;
     private FirebaseAuth firebaseAuth;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_rate_us, null);
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Rate Us and Leave Feedback");
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.drawermain);
 
-        editTextdevice = (EditText)v.findViewById(R.id.editTextDevice);
-        editTextOS = (EditText)v.findViewById(R.id.editTextOS);
-        editTextApplication = (EditText)v.findViewById(R.id.editTextApplication);
-        editTextIndustry = (EditText)v.findViewById(R.id.editTextIndustry);
-        editTextAppDescription = (EditText)v.findViewById(R.id.editTextAppDescription);
-        editTextPhoneNumber = (EditText)v.findViewById(R.id.editTextContactPhoneNumber);
-        editTextContactEmail = (EditText)v.findViewById(R.id.editTextContactEmail);
-        buttonGetQuote = (Button)v.findViewById(R.id.buttonGetQuote);
+
+        editTextdevice = (EditText)findViewById(R.id.editTextDevice);
+        editTextOS = (EditText)findViewById(R.id.editTextOS);
+        editTextApplication = (EditText)findViewById(R.id.editTextApplication);
+        editTextIndustry = (EditText)findViewById(R.id.editTextIndustry);
+        editTextAppDescription = (EditText)findViewById(R.id.editTextAppDescription);
+        editTextPhoneNumber = (EditText)findViewById(R.id.editTextContactPhoneNumber);
+        editTextContactEmail = (EditText)findViewById(R.id.editTextContactEmail);
+        buttonGetQuote = (Button)findViewById(R.id.buttonGetQuote);
         buttonGetQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeAzureTable();
-                uploadOrder();
+
+                if(editTextdevice.getText().toString().trim().equals("")){
+                    editTextdevice.setError("Device Required");
+                }else if(editTextOS.getText().toString().trim().equals("")){
+                    editTextOS.setError("OS Required");
+                }else if(editTextApplication.getText().toString().trim().equals("")){
+                    editTextApplication.setError("Application Type Required");
+                 }else if(editTextIndustry.getText().toString().trim().equals("")){
+                    editTextIndustry.setError("Industry Required");
+                }else if(editTextAppDescription.getText().toString().trim().equals("")){
+                    editTextAppDescription.setError("Short Description Required");
+                }else if(editTextPhoneNumber.getText().toString().trim().equals("")){
+                    editTextPhoneNumber.setError("Phone Number Required");
+                }else if(editTextContactEmail.getText().toString().trim().equals("")) {
+                    editTextContactEmail.setError("Email Required");
+                } else {
+                    initializeAzureTable();
+                    uploadOrder();
+                }
             }
         });
 
 
-        return v;
+
     }
     private void initializeAzureTable() {
         try {
             mobileServiceClientOrderApp = new MobileServiceClient(
                     getString(R.string.web_address),
-                   getActivity());
+                  RateUs.this);
             mobileServiceClientOrderApp.setAndroidHttpClientFactory(new OkHttpClientFactory() {
                 @Override
                 public OkHttpClient createOkHttpClient() {
@@ -111,7 +130,7 @@ public class RateUs extends Fragment {
             editTextPhoneNumber.setText("");
             editTextContactEmail.setText("");
 
-            Toast.makeText(getActivity(), "Submitted", Toast.LENGTH_LONG).show();
+            Toast.makeText(RateUs.this, "Submitted", Toast.LENGTH_LONG).show();
         }
         catch (Exception e){
             Log.e("feedback ", e.toString());
