@@ -65,6 +65,9 @@
         <activity android:name=".DashBord.ShowFeeds"
             android:configChanges="orientation|screenSize|keyboardHidden">
         </activity>
+        <activity android:name=".ForumMainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
     </application>
 
 </manifest>

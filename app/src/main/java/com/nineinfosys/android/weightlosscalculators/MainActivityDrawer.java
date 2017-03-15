@@ -26,7 +26,9 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
@@ -68,6 +70,7 @@ public class MainActivityDrawer extends AppCompatActivity {
     FragmentTransaction mFragmentTransaction;
     ImageView profilePictureView;
     TextView Name,email;
+    private ListView listView;
     private FloatingActionButton fab;
    public Toolbar toolbar;
     Intent intent;
@@ -119,8 +122,8 @@ public class MainActivityDrawer extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent intent = new Intent(MainActivityDrawer.this, ForumMainActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(MainActivityDrawer.this, ForumMainActivity.class);
+                startActivity(intent);
             }
         });
 
