@@ -400,7 +400,7 @@ public class MainActivityDrawer extends AppCompatActivity {
                     Intent loginIntent = new Intent(MainActivityDrawer.this, LoginActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
-                    closeapp();
+                    finish();
                 }
                 else {
 
