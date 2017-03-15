@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nineinfosys.android.weightlosscalculators">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -39,7 +40,7 @@
 
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
-        </activity>
+        </activity  >
         <activity
             android:name=".MainActivityDrawer"
             android:configChanges="orientation|screenSize|keyboardHidden">
@@ -49,8 +50,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".Login.LoginActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
+            android:configChanges="orientation|screenSize|keyboardHidden">
+
+        </activity>
         <activity android:name=".DashBord.GetApp"
             android:configChanges="orientation|screenSize|keyboardHidden">
         <meta-data
@@ -58,7 +63,8 @@
             android:value=".MainActivityDrawer" />
         </activity>
         <activity android:name=".DashBord.ShowFeeds"
-            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
+            android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
     </application>
 
 </manifest>
