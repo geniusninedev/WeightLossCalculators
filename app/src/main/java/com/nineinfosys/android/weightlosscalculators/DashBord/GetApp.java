@@ -172,6 +172,7 @@ public class GetApp extends AppCompatActivity{
         switch(keyCode){
             case KeyEvent.KEYCODE_BACK:
                 Intent intent=new Intent(GetApp.this,MainActivityDrawer.class);
+                finish();
                 startActivity(intent);
                 return true;
         }

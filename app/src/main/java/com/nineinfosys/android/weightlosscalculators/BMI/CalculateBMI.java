@@ -1,5 +1,7 @@
 package com.nineinfosys.android.weightlosscalculators.BMI;
 
+import android.graphics.Color;
+
 /**
  * Created by Dev on 23-02-2017.
  */
@@ -85,6 +87,38 @@ public class CalculateBMI {
 
         }
     }
+    // Interpret what BMI COLOR
+    public int interpretBMICOLOR() {
+
+        if (gender == "Male") {
+            if (bmi < 16) {
+                return Color.parseColor("#dc9b22");
+            } else if (bmi < 18.5) {
+                return Color.parseColor("#df8b2c");
+            } else if (bmi < 25) {
+                return Color.parseColor("#059733");
+            } else if (bmi < 30) {
+                return Color.parseColor("#f7262d");
+            } else if (bmi < 35) {
+                return  Color.parseColor("#c41919");
+            } else if (bmi < 40) {
+                return  Color.parseColor("#c41919");
+            } else {
+                return  Color.parseColor("#c41919");
+            }
+        } else {
+            if (bmi < 17.5) {
+                return  Color.parseColor("#df8b2c");
+            } else if (bmi < 24.9) {
+                return Color.parseColor("#059733");
+            } else if (bmi < 40) {
+                return Color.parseColor("#c41919");
+            } else {
+                return Color.parseColor("#c41919");
+            }
+
+        }
+    }
     //Calculate Ideal FAT
     public float calculateFATResult() {
 
@@ -126,6 +160,32 @@ public class CalculateBMI {
                 return "Obese";
             }
         }
-
     }
+    // Interpret what FAT COLOR
+    public int interpretFATCOLOR() {
+
+        if (gender == "Female") {
+            if (FAT_percentage < 20) {
+                return Color.parseColor("#dc9b22");
+            } else if (FAT_percentage < 24) {
+                return Color.parseColor("#059733");
+            } else if (FAT_percentage < 31) {
+                return Color.parseColor("#059733");
+            } else {
+                return Color.parseColor("#c41919");
+            }
+        } else {
+            if (FAT_percentage < 6) {
+                return Color.parseColor("#dc9b22");
+            } else if (FAT_percentage < 17) {
+                return Color.parseColor("#059733");
+            } else if (FAT_percentage < 25) {
+                return Color.parseColor("#059733");
+            } else {
+                return Color.parseColor("#c41919");
+            }
+        }
+    }
+
+
 }

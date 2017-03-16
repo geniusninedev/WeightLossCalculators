@@ -300,10 +300,14 @@ public class BMIFragment extends Fragment {
         textViewBMI.setText(f.format(resultBMI));
         String interpretBMIResult = calculateBMI.interpretBMI();
         textViewBMIInterpret.setText(interpretBMIResult);
+        int interpretBMIColorResult=calculateBMI.interpretBMICOLOR();
+        textViewBMIInterpret.setTextColor(interpretBMIColorResult);
         float resultFAT = calculateBMI.calculateFATResult();
         textViewFAT.setText(f.format(resultFAT));
         String interpretFATResult = calculateBMI.interpretFAT();
         textViewFATInterpret.setText(interpretFATResult);
+        int resultFATColor=calculateBMI.interpretFATCOLOR();
+        textViewFATInterpret.setTextColor(resultFATColor);
     }
 
 }

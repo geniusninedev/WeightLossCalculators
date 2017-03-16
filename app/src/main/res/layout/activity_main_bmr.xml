@@ -282,6 +282,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewBMR"
                     android:gravity="center"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:layout_weight="1" />
             </LinearLayout>

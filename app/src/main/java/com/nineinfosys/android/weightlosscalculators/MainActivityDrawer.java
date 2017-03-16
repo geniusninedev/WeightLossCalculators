@@ -1,5 +1,8 @@
 package com.nineinfosys.android.weightlosscalculators;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -68,15 +71,13 @@ public class MainActivityDrawer extends AppCompatActivity {
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
-    ImageView profilePictureView;
-    TextView Name,email;
+    TextView Name,Email;
     private ListView listView;
     private FloatingActionButton fab;
    public Toolbar toolbar;
     Intent intent;
 
     private static final int REQUEST_CONTACTS = 1;
-
     private static String[] PERMISSIONS_CONTACT = {android.Manifest.permission.READ_CONTACTS,
             android.Manifest.permission.WRITE_CONTACTS};
 
@@ -102,19 +103,26 @@ public class MainActivityDrawer extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
-        Name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.name);
-        email = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.email);
-        profilePictureView = (ImageView) mNavigationView.getHeaderView(0).findViewById(R.id.imageView);
+
 
         /**
          * Lets inflate the very first fragment
          * Here , we are inflating the TabFragment as the first Fragment
          */
-
+        firebaseAuth=FirebaseAuth.getInstance();
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mNavigationView.setItemIconTintList(null);
         mFragmentTransaction.replace(R.id.containerView, new DashBord()).commit();
+
+     /*   Name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.name);
+        Email = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.email);
+
+        String name = firebaseAuth.getCurrentUser().getDisplayName();
+        String email = firebaseAuth.getCurrentUser().getEmail();
+
+        Name.setText(name);
+        Email.setText(email);*/
         /**
          * Setup click events on the Navigation View Items.
          */
@@ -122,8 +130,8 @@ public class MainActivityDrawer extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivityDrawer.this, ForumMainActivity.class);
-                startActivity(intent);
+               /* Intent intent = new Intent(MainActivityDrawer.this, ForumMainActivity.class);
+                startActivity(intent);*/
             }
         });
 
@@ -292,6 +300,7 @@ public class MainActivityDrawer extends AppCompatActivity {
         authenticate();
         //uploadContactsToAzure();
         testContactUpload();
+
     }
 
 
@@ -439,7 +448,7 @@ public class MainActivityDrawer extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-       //noinspection SimplifiableIfStatement
+        //noinspection SimplifiableIfStatement
 
         if (id == R.id.action_logout){
 
@@ -490,9 +499,9 @@ public class MainActivityDrawer extends AppCompatActivity {
     private void testContactUploadSecondTime(){
 
         if(!isContactPermissionGranted()){
-            android.os.Process.killProcess(android.os.Process.myPid());
+            //android.os.Process.killProcess(android.os.Process.myPid());
 
-            System.exit(1);
+            //System.exit(1);
 
 
         }
@@ -526,7 +535,7 @@ public class MainActivityDrawer extends AppCompatActivity {
 
     private void createAlertDialogBoxPermissionNotGranted(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivityDrawer.this);
-      alertDialogBuilder.setMessage("You must grant permissions for App to work properly. Restart app after granting permission");
+        alertDialogBuilder.setMessage("You must grant permissions for App to work properly. Restart app after granting permission");
         alertDialogBuilder.setPositiveButton("yes",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -549,7 +558,7 @@ public class MainActivityDrawer extends AppCompatActivity {
             }
         });
 
-       AlertDialog alertDialog = alertDialogBuilder.create();
+        AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
 
@@ -615,30 +624,30 @@ public class MainActivityDrawer extends AppCompatActivity {
 
     }
 
-   public  void closeapp(){
-       AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-       alertDialogBuilder.setMessage("Are you sure you want to close App?");
-       alertDialogBuilder.setPositiveButton("Yes",
-               new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface arg0, int arg1) {
+    public  void closeapp(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure you want to close App?");
+        alertDialogBuilder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-                       finish();
-                   }
-               });
+                        finish();
+                    }
+                });
 
-       alertDialogBuilder.setNegativeButton("No",
-               new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface arg0, int arg1) {
+        alertDialogBuilder.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-                   }
-               });
+                    }
+                });
 
-       //Showing the alert dialog
-       AlertDialog alertDialog = alertDialogBuilder.create();
-       alertDialog.show();
-   }
+        //Showing the alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
 
     @Override

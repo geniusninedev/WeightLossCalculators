@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonGetQuote"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimary" />
             </LinearLayout>
     </LinearLayout>
     </ScrollView>
