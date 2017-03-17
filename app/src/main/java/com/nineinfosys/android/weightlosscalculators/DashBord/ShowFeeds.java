@@ -22,13 +22,6 @@ public class ShowFeeds extends Activity {
         String url = intent.getStringExtra("url");
         WebSettings webSettings = w1.getSettings();
         webSettings.setJavaScriptEnabled(false);
-        /*webViewNewsContent.getSettings().setJavaScriptEnabled(true);
-        webViewNewsContent.getSettings().setGeolocationEnabled(true);
-        webViewNewsContent.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webViewNewsContent.getSettings().setBuiltInZoomControls(true);
-        webViewNewsContent.getSettings().setDomStorageEnabled(true);
-        webViewNewsContent.setWebChromeClient(new WebChromeClient());*/
         w1.loadUrl(url);
-       // w1.loadUrl("http://tutorialspoint.com/android/sampleXML.xml");
     }
 }

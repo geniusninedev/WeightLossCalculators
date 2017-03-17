@@ -49,7 +49,6 @@ public class DashBord extends Fragment {
                 Intent news = new Intent(getActivity(), ShowFeeds.class);
                 news.putExtra("url", item) ;
                 startActivity(news);
-               // Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -67,7 +66,7 @@ public class DashBord extends Fragment {
             @Override
             protected Void doInBackground(Void... params) {
                 try{
-                    /////////////////////////////////////////////////
+
                     try {
                         URL url = new URL("http://www.womenshealthandfitness.com.au/component/obrss/weight-loss");
                         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -111,7 +110,7 @@ public class DashBord extends Fragment {
                                 } else if (xpp.getName().equalsIgnoreCase("link")) {
                                     if (insideItem){
                                         try {
-                                            final String link=(xpp.nextText()); ////////////
+                                            final String link=(xpp.nextText());
                                             Log.e("Link ", link);
                                             links.add(link);
                                         }catch(Exception e){
@@ -120,11 +119,10 @@ public class DashBord extends Fragment {
                                         getActivity().runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                /////////////
+
 
                                             }
                                         });
-                                        //extract the link of article
                                     }
 
                                 }
@@ -139,7 +137,6 @@ public class DashBord extends Fragment {
                     }catch (Exception e){
                         Log.e("ERROR_PARSER", e.toString());
                     }
-                    ////////////////////////////////////////////////////
 
 
                 }catch (Exception e){

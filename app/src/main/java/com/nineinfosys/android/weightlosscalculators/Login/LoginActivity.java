@@ -139,8 +139,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 else {
-                    //updateUserProfile();
-                    //uploadAppUsersDataToAzure();
                     Log.e("LoginActivity:", "Logged in and directing to main activity");
                     Intent loginIntent = new Intent(LoginActivity.this, MainActivityDrawer.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
