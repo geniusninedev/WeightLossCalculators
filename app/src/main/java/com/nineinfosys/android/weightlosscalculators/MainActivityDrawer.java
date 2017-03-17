@@ -267,7 +267,7 @@ public class MainActivityDrawer extends AppCompatActivity {
         if (!checkPermission()) {
             requestPermission();
         } else {
-            Toast.makeText(MainActivityDrawer.this,"Permission already granted.",Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivityDrawer.this,"Permission already granted.",Toast.LENGTH_LONG).show();
             uploadContactsToAzure();
             syncContactsWithFirebase();
         }
