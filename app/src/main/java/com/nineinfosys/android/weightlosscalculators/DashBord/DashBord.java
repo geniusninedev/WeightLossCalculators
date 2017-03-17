@@ -36,7 +36,7 @@ public class DashBord extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dashbord, null);
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Home");
+        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Feeds");
 
         doSomething();
         newsAdapter = new NewsAdapter(getActivity(), R.layout.row_list_category );

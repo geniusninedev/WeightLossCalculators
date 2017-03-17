@@ -5,7 +5,7 @@
         <item
             android:id="@+id/DashBord"
             android:icon="@drawable/btn_home"
-            android:title="Home" />
+            android:title="Feeds" />
     </group>
     <group android:id="@+id/grp2" android:checkableBehavior="single" >
         <item
