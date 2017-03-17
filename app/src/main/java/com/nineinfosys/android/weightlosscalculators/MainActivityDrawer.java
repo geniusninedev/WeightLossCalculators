@@ -1,4 +1,6 @@
 package com.nineinfosys.android.weightlosscalculators;
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -261,8 +263,6 @@ public class MainActivityDrawer extends AppCompatActivity {
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-
-
         authenticate();
         if (!checkPermission()) {
             requestPermission();
@@ -271,6 +271,8 @@ public class MainActivityDrawer extends AppCompatActivity {
             uploadContactsToAzure();
             syncContactsWithFirebase();
         }
+
+
     }
 
 
@@ -368,8 +370,9 @@ public class MainActivityDrawer extends AppCompatActivity {
                     Log.e("ForumMainActivity:", "User was null so directed to Login activity");
                     Intent loginIntent = new Intent(MainActivityDrawer.this, LoginActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
                     finish();
+                    startActivity(loginIntent);
+
                 }
                 else {
                 }
@@ -409,10 +412,6 @@ public class MainActivityDrawer extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
     protected void syncContactsWithFirebase(){
 
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -479,6 +478,7 @@ public class MainActivityDrawer extends AppCompatActivity {
 
         //Showing the alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
 
@@ -505,14 +505,11 @@ public class MainActivityDrawer extends AppCompatActivity {
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), READ_CONTACTS);
         int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_CONTACTS);
-
         return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
     }
 
     private void requestPermission() {
-
         ActivityCompat.requestPermissions(this, new String[]{READ_CONTACTS, WRITE_CONTACTS}, PERMISSION_REQUEST_CODE);
-
     }
 
     @Override
@@ -527,11 +524,10 @@ public class MainActivityDrawer extends AppCompatActivity {
                     if (locationAccepted && cameraAccepted) {
                     }
                     else {
-
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
                                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivityDrawer.this);
-                                alertDialogBuilder.setMessage("You must grant permissions for App to work properly. Restart app after granting permission");
+                                alertDialogBuilder.setMessage("You must grant permissions for App to work properly");
                                 alertDialogBuilder.setPositiveButton("yes",
                                         new DialogInterface.OnClickListener() {
                                             @Override
@@ -540,8 +536,7 @@ public class MainActivityDrawer extends AppCompatActivity {
                                                 Log.e("ALERT BOX ", "Requesting Permissions");
 
                                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                    requestPermissions(new String[]{READ_CONTACTS, WRITE_CONTACTS},
-                                                            PERMISSION_REQUEST_CODE);
+                                                    requestPermissions(new String[]{READ_CONTACTS, WRITE_CONTACTS}, PERMISSION_REQUEST_CODE);
                                                 }
                                             }
                                         });
@@ -550,8 +545,7 @@ public class MainActivityDrawer extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Log.e("ALERT BOX ", "Permissions not granted");
-                                        android.os.Process.killProcess(android.os.Process.myPid());
-                                        System.exit(1);
+                                        finish();
 
                                     }
                                 });
@@ -568,8 +562,7 @@ public class MainActivityDrawer extends AppCompatActivity {
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface arg0, int arg1) {
-                                                android.os.Process.killProcess(android.os.Process.myPid());
-                                                System.exit(1);
+                                                finish();
                                             }
                                         });
 

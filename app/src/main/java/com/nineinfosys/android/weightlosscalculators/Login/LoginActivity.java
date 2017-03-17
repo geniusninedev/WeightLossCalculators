@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
                                 try {
 
                                     userFacebookData = new UserFacebookData();
-
                                     userFacebookData.setEmail(object.getString("email"));
                                     userFacebookData.setFacebookid(object.getString("id").toString());
                                     userFacebookData.setUsername(object.getString("name").toString());
