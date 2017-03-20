@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -291,6 +292,10 @@ public class AnorexicBMIFragment extends Fragment {
                 }
             }
         });
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+
         return v;
     }
 
@@ -305,4 +310,5 @@ public class AnorexicBMIFragment extends Fragment {
         textViewBMIInterpret.setTextColor(interpretBMIColorResult);
         
     }
+
 }
