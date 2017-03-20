@@ -3,6 +3,7 @@ package com.nineinfosys.android.weightlosscalculators.DashBord;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -23,5 +24,9 @@ public class ShowFeeds extends Activity {
         WebSettings webSettings = w1.getSettings();
         webSettings.setJavaScriptEnabled(false);
         w1.loadUrl(url);
+        ShowFeeds.this.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+
     }
 }
