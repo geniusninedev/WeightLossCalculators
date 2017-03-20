@@ -1,5 +1,7 @@
 package com.nineinfosys.android.weightlosscalculators.FAT;
 
+import android.graphics.Color;
+
 /**
  * Created by Dev on 23-02-2017.
  */
@@ -85,5 +87,30 @@ public class CalculateFAT {
             }
         }
 
+    }
+    // Interpret what FAT COLOR
+    public int interpretFATCOLOR() {
+
+        if (gender == "Female") {
+            if (FAT_percentage < 20) {
+                return Color.parseColor("#dc9b22");
+            } else if (FAT_percentage < 24) {
+                return Color.parseColor("#059733");
+            } else if (FAT_percentage < 31) {
+                return Color.parseColor("#059733");
+            } else {
+                return Color.parseColor("#c41919");
+            }
+        } else {
+            if (FAT_percentage < 6) {
+                return Color.parseColor("#dc9b22");
+            } else if (FAT_percentage < 17) {
+                return Color.parseColor("#059733");
+            } else if (FAT_percentage < 25) {
+                return Color.parseColor("#059733");
+            } else {
+                return Color.parseColor("#c41919");
+            }
+        }
     }
 }

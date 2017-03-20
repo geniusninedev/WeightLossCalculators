@@ -111,5 +111,7 @@ public void calculateFAT(float age,float bmi,String gender){
     textViewFAT.setText(f.format(resultFAT));
     String interpretFATResult = calculateFAT.interpretFAT();
     textViewFATInterpret.setText(interpretFATResult);
+    int resultFATColor=calculateFAT.interpretFATCOLOR();
+    textViewFATInterpret.setTextColor(resultFATColor);
 }
 }

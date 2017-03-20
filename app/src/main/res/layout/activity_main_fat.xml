@@ -122,6 +122,22 @@
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
                 android:background="#000000" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:text=" Result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewResult"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
             <!-- Text view for showing result -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -176,6 +192,7 @@
                     android:id="@+id/TextViewbmr"
                     android:textStyle="bold"
                     android:gravity="center"
+                    android:textSize="16dp"
                     android:textColor="#000000"
                     android:layout_weight="1" />
 
@@ -185,11 +202,14 @@
                     android:id="@+id/textViewFAT"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
                     android:layout_weight="1" />
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:textSize="16dp"
                     android:id="@+id/textViewFATInterpret"
                     android:layout_weight="1"
                     android:textStyle="bold"
@@ -229,12 +249,12 @@
                 <TextView
                     android:text="Classification"
                     android:layout_width="100dp"
+                    android:textColor="#000000"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewfATClassification"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:textColor="#000000"
                     android:textSize="14dp" />
                 <TextView
                     android:text="Woman"
@@ -243,8 +263,8 @@
                     android:id="@+id/textViewfATClassification2"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:layout_weight="1"
                     android:textColor="#000000"
+                    android:layout_weight="1"
                     android:textSize="14dp" />
                 <TextView
                     android:text="Men"
@@ -252,9 +272,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewfATClassification3"
                     android:gravity="center"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:textColor="#000000"
                     android:textSize="14dp" />
             </LinearLayout>
             <LinearLayout
@@ -272,12 +292,12 @@
                     <TextView
                         android:text="Athletes"
                         android:textStyle="bold"
-                        android:textColor="#000000"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/textViewAthletes"
                         android:gravity="center"
                         android:layout_weight="1"
+                        android:textColor="#dc9b22"
                         android:textSize="14dp" />
                     <TextView
                         android:text="14-20%"
@@ -285,9 +305,9 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/textViewAthletes2"
                         android:gravity="center"
+                        android:textColor="#dc9b22"
                         android:layout_weight="1"
-                        android:textColor="#000000"
-                        android:textSize="14dp" />
+                        android:textSize="16dp" />
                     <TextView
                         android:text="6-13%"
                         android:layout_width="100dp"
@@ -295,8 +315,8 @@
                         android:id="@+id/textViewAthletes3"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:textColor="#000000"
-                        android:textSize="14dp" />
+                        android:textColor="#dc9b22"
+                        android:textSize="16dp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -314,7 +334,7 @@
                         android:textStyle="bold"
                         android:id="@+id/textViewFitness"
                         android:layout_weight="1"
-                        android:textColor="#000000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14dp" />
                     <TextView
                         android:text="21-24%"
@@ -323,8 +343,8 @@
                         android:gravity="center"
                         android:id="@+id/textViewFitness2"
                         android:layout_weight="1"
-                        android:textColor="#000000"
-                        android:textSize="14dp" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp" />
                     <TextView
                         android:text="14-17%"
                         android:layout_width="100dp"
@@ -332,8 +352,8 @@
                         android:gravity="center"
                         android:id="@+id/textViewFitness3"
                         android:layout_weight="1"
-                        android:textColor="#000000"
-                        android:textSize="14dp" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -350,8 +370,8 @@
                         android:id="@+id/textViewAcceptable"
                         android:layout_weight="1"
                         android:textStyle="bold"
-                        android:textColor="#000000"
                         android:gravity="center"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14dp" />
                     <TextView
                         android:text=" 25-31%"
@@ -360,17 +380,17 @@
                         android:id="@+id/textViewAcceptable2"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="14dp" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp" />
                     <TextView
                         android:text="18-25%"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/textViewAcceptable3"
                         android:layout_weight="1"
-                        android:textColor="#000000"
                         android:gravity="center"
-                        android:textSize="14dp" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -387,18 +407,20 @@
                         android:id="@+id/textViewObese"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="#000000"
                         android:textStyle="bold"
+                        android:textColor="#c41919"
                         android:textSize="14dp" />
+
                     <TextView
                         android:text="32%"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/textViewObese2"
                         android:layout_weight="1"
-                        android:textColor="#000000"
                         android:gravity="center"
-                        android:textSize="14dp" />
+                        android:textColor="#c41919"
+                        android:textSize="16dp" />
+
                     <TextView
                         android:text="25%"
                         android:layout_width="100dp"
@@ -406,14 +428,15 @@
                         android:id="@+id/textViewObese3"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="14dp" />
+                        android:textColor="#c41919"
+                        android:textSize="16dp" />
                 </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dip"
+                    android:layout_marginTop="20dp"
+                    android:background="#000000" />
             </LinearLayout>
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dip"
-                android:background="#000000" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

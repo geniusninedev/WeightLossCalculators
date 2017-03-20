@@ -258,6 +258,22 @@
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
                 android:background="#000000" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:text=" Results"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewResult"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
             <!-- Text view for showing result -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -301,6 +317,7 @@
                     android:textColor="#000000"
                     android:id="@+id/TextViewCaloriesmaintain"
                     android:textStyle="bold"
+                    android:textSize="16sp"
                     android:gravity="center"
                     android:layout_weight="1" />
 
@@ -309,7 +326,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewMainTainWeight"
                     android:gravity="center"
+                    android:textSize="18sp"
                     android:textStyle="bold"
+                    android:textColor="#000000"
                     android:layout_weight="1" />
 
             </LinearLayout>
@@ -330,6 +349,7 @@
                     android:id="@+id/TextViewCalorieslose1lb"
                     android:textStyle="bold"
                     android:gravity="center"
+                    android:textSize="16sp"
                     android:textColor="#000000"
                     android:layout_weight="1" />
                 <TextView
@@ -337,6 +357,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewCalorieslosehaifkg"
                     android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:layout_weight="1" />
 
@@ -355,6 +377,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/TextViewCalorieslose2lb"
                     android:textStyle="bold"
+                    android:textSize="16sp"
                     android:gravity="center"
                     android:textColor="#000000"
                     android:layout_weight="1" />
@@ -364,6 +387,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewCaloriesloseOneKg"
                     android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:layout_weight="1" />
 
@@ -382,6 +407,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/TextViewCaloriesgain1lb"
                     android:textStyle="bold"
+                    android:textSize="16sp"
                     android:gravity="center"
                     android:textColor="#000000"
                     android:layout_weight="1" />
@@ -391,6 +417,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewCaloriesgainhaifkg"
                     android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_weight="1" />
 
@@ -410,6 +438,7 @@
                     android:id="@+id/TextViewCaloriesgain2lb"
                     android:textStyle="bold"
                     android:gravity="center"
+                    android:textSize="16sp"
                     android:textColor="#000000"
                     android:layout_weight="1" />
 
@@ -418,11 +447,13 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewCaloriesgainonekg"
                     android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
                     android:layout_weight="1"
                     android:textStyle="bold"/>
             </LinearLayout>
             <View
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
                 android:background="#000000" />
