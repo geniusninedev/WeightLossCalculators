@@ -73,7 +73,9 @@ public class ArmyBodyFatFragment extends Fragment {
         final AlertDialog alertDialogGender = alertDialogBuilderGender.create();
 
         //on Alert Radio Button Gender On click listener
-        imageViewGender.setOnClickListener(new View.OnClickListener() {
+        imageViewGender.setOnClickListener(
+
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialogGender.show();
