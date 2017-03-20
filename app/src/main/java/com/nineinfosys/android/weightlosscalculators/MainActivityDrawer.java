@@ -2,6 +2,7 @@ package com.nineinfosys.android.weightlosscalculators;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -54,6 +55,8 @@ import com.nineinfosys.android.weightlosscalculators.Login.Contacts;
 import com.nineinfosys.android.weightlosscalculators.Login.LoginActivity;
 import com.nineinfosys.android.weightlosscalculators.Weight.WeightFragment;
 import com.squareup.okhttp.OkHttpClient;
+
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -546,7 +549,6 @@ public class MainActivityDrawer extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Log.e("ALERT BOX ", "Permissions not granted");
                                         finish();
-
                                     }
                                 });
 
