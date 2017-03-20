@@ -301,6 +301,8 @@ public class AnorexicBMIFragment extends Fragment {
         textViewBMI.setText(f.format(resultBMI));
         String interpretBMIResult = calculateBMI.interpretBMI();
         textViewBMIInterpret.setText(interpretBMIResult);
+        int interpretBMIColorResult=calculateBMI.interpretBMICOLOR();
+        textViewBMIInterpret.setTextColor(interpretBMIColorResult);
         
     }
 }

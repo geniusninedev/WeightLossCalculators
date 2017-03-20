@@ -1,5 +1,7 @@
 package com.nineinfosys.android.weightlosscalculators.AnorexicBMI;
 
+import android.graphics.Color;
+
 /**
  * Created by Dev on 23-02-2017.
  */
@@ -81,6 +83,38 @@ public class CalculateBMI {
                 return "Overweight";
             } else {
                 return "Obese Class ";
+            }
+
+        }
+    }
+    // Interpret what BMI COLOR
+    public int interpretBMICOLOR() {
+
+        if (gender == "Male") {
+            if (bmi < 16) {
+                return Color.parseColor("#dc9b22");
+            } else if (bmi < 18.5) {
+                return Color.parseColor("#df8b2c");
+            } else if (bmi < 25) {
+                return Color.parseColor("#059733");
+            } else if (bmi < 30) {
+                return Color.parseColor("#f7262d");
+            } else if (bmi < 35) {
+                return  Color.parseColor("#c41919");
+            } else if (bmi < 40) {
+                return  Color.parseColor("#c41919");
+            } else {
+                return  Color.parseColor("#c41919");
+            }
+        } else {
+            if (bmi < 17.5) {
+                return  Color.parseColor("#df8b2c");
+            } else if (bmi < 24.9) {
+                return Color.parseColor("#059733");
+            } else if (bmi < 40) {
+                return Color.parseColor("#c41919");
+            } else {
+                return Color.parseColor("#c41919");
             }
 
         }
