@@ -226,7 +226,7 @@ public class LeanBodyMassFragment extends Fragment {
                                 } else if (edittextWeightInLb.getText().toString().equals("")) {
                                     edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
                                 } else {
-                                    calculateLeanBodyMass(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(editTextWeight.getText().toString().trim())* (0.454)), radioButtonSex.getText().toString().trim());
+                                    calculateLeanBodyMass(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim())* (0.454)), radioButtonSex.getText().toString().trim());
                                 }
                             }
                             else {
@@ -262,7 +262,7 @@ public class LeanBodyMassFragment extends Fragment {
                                 } else if (edittextWeightInLb.getText().toString().equals("")) {
                                     edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
                                 } else {
-                                    calculateLeanBodyMass((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(editTextWeight.getText().toString().trim()) * (0.454)), radioButtonSex.getText().toString().trim());
+                                    calculateLeanBodyMass((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim()) * (0.454)), radioButtonSex.getText().toString().trim());
                                 }
                             } else {
                                 //Validation for Edittext  if is blank

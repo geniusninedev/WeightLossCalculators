@@ -234,7 +234,7 @@ public class BMRFragment extends Fragment {
                                 } else if (edittextWeightInLb.getText().toString().equals("")) {
                                     edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
                                 } else {
-                                    calculateBMR(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(editTextWeight.getText().toString().trim())* (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
+                                    calculateBMR(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim())* (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
                                 }
                             }
                            else {
@@ -277,7 +277,7 @@ public class BMRFragment extends Fragment {
                                 } else if (edittextWeightInLb.getText().toString().equals("")) {
                                     edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
                                 } else {
-                                    calculateBMR((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(editTextWeight.getText().toString().trim()) * (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
+                                    calculateBMR((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim()) * (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
                                 }
                             } else {
                                 //Validation for Edittext  if is blank
