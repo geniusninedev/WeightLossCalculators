@@ -42,10 +42,10 @@ public class AnorexicBMIFragment extends Fragment {
 
         MobileAds.initialize(getActivity(), getString(R.string.ads_app_id));
         AdView mAdView = (AdView) v.findViewById(R.id.adViewMainPageABmi);
-        AdView AdView = (AdView) v.findViewById(R.id.adViewPageABmi);
+
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        AdView.loadAd(adRequest);
+
 
 
         ((MainActivityDrawer) getActivity()).toolbar.setTitle("Anorexic BMI");
