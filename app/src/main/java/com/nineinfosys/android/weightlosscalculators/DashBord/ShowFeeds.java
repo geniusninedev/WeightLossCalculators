@@ -18,7 +18,7 @@ public class ShowFeeds extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_feeds);
-        WebView w1=(WebView)findViewById(R.id.webView);
+        WebView w1 = (WebView) findViewById(R.id.webView);
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
         WebSettings webSettings = w1.getSettings();
@@ -27,6 +27,5 @@ public class ShowFeeds extends Activity {
         ShowFeeds.this.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-
     }
 }
