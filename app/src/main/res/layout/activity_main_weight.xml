@@ -109,6 +109,27 @@
             ads:adSize="SMART_BANNER"
             ads:adUnitId="@string/banner_ad_unit_id">
         </com.google.android.gms.ads.AdView>
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#000000" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center">
+            <TextView
+                android:text=" Result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewResultDemo"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textSize="18dp"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,7 +140,11 @@
             android:textSize="20sp"
             android:layout_gravity="center"
             android:textStyle="bold" />
-
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#000000" />
 
     </LinearLayout>
     </ScrollView>

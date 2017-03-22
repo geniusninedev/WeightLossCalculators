@@ -356,7 +356,7 @@ public class MainActivityDrawer extends AppCompatActivity {
     ///Authentication with firebase
     private void authenticate(){
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuthListner = new FirebaseAuth.AuthStateListener() {
+        firebaseAuthListner =  new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()==null){
