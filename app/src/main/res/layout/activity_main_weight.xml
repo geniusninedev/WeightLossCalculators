@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivityDrawer"
     android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -102,10 +103,10 @@
             android:id="@+id/adViewMainPageWeight"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            ads:adSize="LARGE_BANNER"
+            ads:adSize="SMART_BANNER"
             ads:adUnitId="@string/banner_ad_unit_id">
         </com.google.android.gms.ads.AdView>
         <TextView
