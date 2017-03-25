@@ -74,6 +74,16 @@ public class CalculateBMI {
             } else {
                 return "Obese Class III";
             }
+        }else if(gender.equals("Children")){
+            if (bmi < 5) {
+                return "Underweight";
+            } else if (bmi < 85) {
+                return "Healthy weight";
+            } else if (bmi < 95) {
+                return "At risk of overweight";
+            } else{
+                return "Overweight";
+            }
         } else {
             if (bmi < 17.5) {
                 return "Underweight";
@@ -105,6 +115,16 @@ public class CalculateBMI {
                 return  Color.parseColor("#c41919");
             } else {
                 return  Color.parseColor("#c41919");
+            }
+        }else if(gender.equals("Children")){
+            if (bmi < 5) {
+                return Color.parseColor("#dc9b22");
+            } else if (bmi < 85) {
+                return Color.parseColor("#059733");
+            } else if (bmi < 95) {
+                return Color.parseColor("#f7262d");
+            } else{
+                return Color.parseColor("#c41919");
             }
         } else {
             if (bmi < 17.5) {

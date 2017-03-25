@@ -38,7 +38,7 @@ public class FatIntakeFragment extends Fragment {
     ImageView imageViewGender,imageViewHeight,imageViewWeight;
     private RadioGroup radioGroupSex,radioGroupHeight,radioGroupWeight;
     private RadioButton radioButtonSex,radioButtonHeight,radioButtonWeight;
-    TextView textViewMainTainWeight,textViewCalorieslosehaifkg,textViewCaloriesloseOneKg,textViewCaloriesgainhaifkg,textViewCaloriesgainonekg;
+    TextView textViewMainTainWeight,textViewCalorieslosehaifkg,textViewCaloriesloseOneKg,textViewCaloriesgainhaifkg,textViewCaloriesgainonekg,textViewCalorie;
     Spinner spinneractivity;
 
     @Override
@@ -82,7 +82,7 @@ public class FatIntakeFragment extends Fragment {
 
         // attaching data adapter to spinner
         spinneractivity.setAdapter(dataAdapter);
-
+        textViewCalorie= (TextView) v.findViewById(R.id.textViewCalorie);
         textViewMainTainWeight = (TextView) v.findViewById(R.id.textViewMainTainWeight);
         textViewCalorieslosehaifkg = (TextView) v.findViewById(R.id.textViewCalorieslosehaifkg);
         textViewCaloriesloseOneKg= (TextView) v.findViewById(R.id.textViewCaloriesloseOneKg);
@@ -343,14 +343,15 @@ public class FatIntakeFragment extends Fragment {
         float resultMaintainWeight,resultlosehaifkg,resultloseOneKg,resultgainhaifkg,resultGainOneKg;
         DecimalFormat f = new DecimalFormat("##.00");
         resultMaintainWeight = calculateBMR.Sedentary() ;
-        textViewMainTainWeight.setText(f.format(resultMaintainWeight));
+        textViewCalorie.setText(f.format(resultMaintainWeight)+" Calories");
+        textViewMainTainWeight.setText("You need "+f.format(resultMaintainWeight)+" Calories/day to maintain your weight. You should take "+f.format(((resultMaintainWeight/8.80)*20)/100)+" - "+f.format(((resultMaintainWeight/8.80)*35)/100)+" grams (20%-35%) of fat per day, within which "+f.format(((resultMaintainWeight/8.80)*10)/100)+"grams (10%) or less saturated fats. Take "+f.format(((resultMaintainWeight/8.80)*7)/100)+"grams (7%) or less saturated fats to further reduce the risk of heart disease.");
         resultlosehaifkg=calculateBMR.LoseHaifKg();
-        textViewCalorieslosehaifkg.setText(f.format(resultlosehaifkg));
+        textViewCalorieslosehaifkg.setText("You need "+f.format(resultlosehaifkg)+" Calories/day to lose 0.5 kg per week. You should take "+f.format(((resultlosehaifkg/8.80)*20)/100)+" - "+f.format(((resultlosehaifkg/8.80)*35)/100)+" grams (20%-35%) of fat per day, within which "+f.format(((resultlosehaifkg/8.80)*10)/100)+"grams (10%) or less saturated fats. Take "+f.format(((resultlosehaifkg/8.80)*7)/100)+"grams (7%) or less saturated fats to further reduce the risk of heart disease.");
         resultloseOneKg=calculateBMR.LoseOnekg();
-        textViewCaloriesloseOneKg.setText(f.format(resultloseOneKg));
+        textViewCaloriesloseOneKg.setText("You need "+f.format(resultloseOneKg)+" Calories/day to lose 1 kg per week. You should take "+f.format(((resultloseOneKg/8.80)*20)/100)+" - "+f.format(((resultloseOneKg/8.80)*35)/100)+" grams (20%-35%) of fat per day, within which "+f.format(((resultloseOneKg/8.80)*10)/100)+"grams (10%) or less saturated fats. Take "+f.format(((resultloseOneKg/8.80)*7)/100)+"grams (7%) or less saturated fats to further reduce the risk of heart disease.");
         resultgainhaifkg=calculateBMR.GainHaifKg();
-        textViewCaloriesgainhaifkg.setText(f.format(resultgainhaifkg));
+        textViewCaloriesgainhaifkg.setText("You need "+f.format(resultgainhaifkg)+" Calories/day to gain 0.5 kg per week. You should take "+f.format(((resultgainhaifkg/8.80)*20)/100)+" - "+f.format(((resultgainhaifkg/8.80)*35)/100)+" grams (20%-35%) of fat per day, within which "+f.format(((resultgainhaifkg/8.80)*10)/100)+"grams (10%) or less saturated fats. Take "+f.format(((resultgainhaifkg/8.80)*7)/100)+"grams (7%) or less saturated fats to further reduce the risk of heart disease.");
         resultGainOneKg=calculateBMR.GainOnekg();
-        textViewCaloriesgainonekg.setText(f.format(resultGainOneKg));
+        textViewCaloriesgainonekg.setText("You need "+f.format(resultGainOneKg)+" Calories/day to gain 1 kg per week. You should take "+f.format(((resultGainOneKg/8.80)*20)/100)+" - "+f.format(((resultGainOneKg/8.80)*35)/100)+" grams (20%-35%) of fat per day, within which "+f.format(((resultGainOneKg/8.80)*10)/100)+"grams (10%) or less saturated fats. Take "+f.format(((resultGainOneKg/8.80)*7)/100)+"grams (7%) or less saturated fats to further reduce the risk of heart disease.");
     }
 }

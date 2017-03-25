@@ -137,9 +137,12 @@ public class IdealWeightFragment extends Fragment {
                 //Default case Calculation
                 if (radioGroupSex.getCheckedRadioButtonId() == -1 && radioGroupHeight.getCheckedRadioButtonId() == -1) {
                     //Validation for Edittext  if is blank
+                    int hightincm= Integer.parseInt(editTextHeight.getText().toString().trim());
                      if (editTextHeight.getText().toString().equals("")) {
                         editTextHeight.setError("Enter Height");
-                    }  else {
+                    }  else if (hightincm<100) {
+                         textViewIdealWeight.setText("Standards Not Available For Your Height");
+                     } else {
                          calculateIdealWeigh(Integer.parseInt(editTextHeight.getText().toString().trim()), "Male");
                     }
                 } else {
@@ -150,18 +153,27 @@ public class IdealWeightFragment extends Fragment {
                     } else {
                         if(radioButtonHeight.getText().toString().trim().equals("CM")) {
                             //Validation for Edittext  if is blank
+                            int hightincm= Integer.parseInt(editTextHeight.getText().toString().trim());
                             if (editTextHeight.getText().toString().equals("")) {
                                 editTextHeight.setError("Enter Height");
-                            } else {
+                            } else if (hightincm<100) {
+                                textViewIdealWeight.setText("Standards Not Available For Your Height");
+                            }
+                            else
+                             {
                                 calculateIdealWeigh(Integer.parseInt(editTextHeight.getText().toString().trim()), radioButtonSex.getText().toString().trim());
                             }
                         }else{
+                            int hightinfeet= (int) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54)));
+
                             //Validation for Edittext  if is blank
                              if(edittextfeet.getText().toString().equals("")){
                                 edittextfeet.setError("Enter Feet");
                             }else if(edittextInch.getText().toString().equals("")){
                                 edittextInch.setError("Enter Inch");
-                            }else {
+                            } else if (hightinfeet<100) {
+                                 textViewIdealWeight.setText("Standards Not Available For Your Height");
+                             }else {
                                 calculateIdealWeigh((int) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), radioButtonSex.getText().toString().trim());
                             }
                         }

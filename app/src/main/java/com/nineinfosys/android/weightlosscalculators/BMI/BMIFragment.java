@@ -68,7 +68,7 @@ public class BMIFragment extends Fragment {
 
         //alert Dialog Declaration For Gender
         final LayoutInflater inflaterGender = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View alertLayoutGender = inflaterGender.inflate(R.layout.dialog, null);
+        final View alertLayoutGender = inflaterGender.inflate(R.layout.dialoggender, null);
         final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(getActivity());
         alertDialogBuilderGender.setTitle("Gender :");
         radioGroupSex = (RadioGroup) alertLayoutGender.findViewById(R.id.radioSex);
@@ -86,8 +86,10 @@ public class BMIFragment extends Fragment {
                         alertDialogGender.cancel();
                         radioButtonSex = (RadioButton) alertLayoutGender.findViewById(radioGroup.getCheckedRadioButtonId());
                         //For Changing Button Image
-                        if (radioButtonSex.getText().toString().trim().equals("Male") || radioButtonSex.getText().toString().trim().equals("")) {
+                        if (radioButtonSex.getText().toString().trim().equals("Male")) {
                             imageViewGender.setImageResource(R.drawable.gender_m);
+                        }else if (radioButtonSex.getText().toString().trim().equals("Children")) {
+                            imageViewGender.setImageResource(R.drawable.gender_children);
                         } else {
                             imageViewGender.setImageResource(R.drawable.gender_f);
                         }
@@ -198,11 +200,16 @@ public class BMIFragment extends Fragment {
                 //for hiding keyboard
                 InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                int age= (int) Float.parseFloat(editTextAge.getText().toString().trim());
                 //Default case Calculation
                 if (radioGroupSex.getCheckedRadioButtonId() == -1&& radioGroupHeight.getCheckedRadioButtonId() == -1 && radioGroupWeight.getCheckedRadioButtonId() == -1) {
                     //Validation for Edittext  if is blank
+
                     if (editTextAge.getText().toString().equals("")) {
                         editTextAge.setError("Enter Age");
+                    }else if(age <18 ){
+                        Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
+
                     } else if (editTextHeight.getText().toString().equals("")) {
                         editTextHeight.setError("Enter Height");
                     } else if (editTextWeight.getText().toString().equals("")) {
@@ -220,12 +227,16 @@ public class BMIFragment extends Fragment {
                         Toast.makeText(getActivity(), "Please Select Weight Unit", Toast.LENGTH_LONG).show();
                     }
                     else {
+
                         if(radioButtonHeight.getText().toString().trim().equals("CM")) {
                             if(radioButtonWeight.getText().toString().trim().equals("KG")) {
                                 //Validation for Edittext  if is blank
                                 if (editTextAge.getText().toString().equals("")) {
                                     editTextAge.setError("Enter Age");
-                                } else if (editTextHeight.getText().toString().equals("")) {
+                                } else if(age <18 ){
+                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
+
+                                }else if (editTextHeight.getText().toString().equals("")) {
                                     editTextHeight.setError("Enter Height");
                                 } else if (editTextWeight.getText().toString().equals("")) {
                                     editTextWeight.setError("Enter Weight");
@@ -236,6 +247,9 @@ public class BMIFragment extends Fragment {
                                 //Validation for Edittext  if is blank
                                 if (editTextAge.getText().toString().equals("")) {
                                     editTextAge.setError("Enter Age");
+                                }else if(age <18 ){
+                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
+
                                 } else if (editTextHeight.getText().toString().equals("")) {
                                     editTextHeight.setError("Enter Height");
                                 } else if (edittextWeightInLb.getText().toString().equals("")) {
@@ -248,7 +262,10 @@ public class BMIFragment extends Fragment {
                                 //Validation for Edittext  if is blank
                                 if (editTextAge.getText().toString().equals("")) {
                                     editTextAge.setError("Enter Age");
-                                } else if (editTextHeight.getText().toString().equals("")) {
+                                } else if(age <18 ){
+                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
+
+                                }else if (editTextHeight.getText().toString().equals("")) {
                                     editTextHeight.setError("Enter Height");
                                 } else if (edittextWeightInST.getText().toString().equals("")) {
                                     edittextWeightInST.setError("Enter Weight in ST (Stone)");
@@ -264,7 +281,10 @@ public class BMIFragment extends Fragment {
                                 //Validation for Edittext  if is blank
                                 if (editTextAge.getText().toString().equals("")) {
                                     editTextAge.setError("Enter Age");
-                                } else if(edittextfeet.getText().toString().equals("")){
+                                } else if(age <18 ){
+                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
+
+                                }else if(edittextfeet.getText().toString().equals("")){
                                     edittextfeet.setError("Enter Feet");
                                 }else if(edittextInch.getText().toString().equals("")){
                                     edittextInch.setError("Enter Inch");
@@ -277,6 +297,9 @@ public class BMIFragment extends Fragment {
                                 //Validation for Edittext  if is blank
                                 if (editTextAge.getText().toString().equals("")) {
                                     editTextAge.setError("Enter Age");
+                                }else if(age <18 ){
+                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
+
                                 }else if(edittextfeet.getText().toString().equals("")){
                                     edittextfeet.setError("Enter Feet");
                                 }else if(edittextInch.getText().toString().equals("")){
@@ -290,7 +313,9 @@ public class BMIFragment extends Fragment {
                                 //Validation for Edittext  if is blank
                                 if (editTextAge.getText().toString().equals("")) {
                                     editTextAge.setError("Enter Age");
-                                } else if(edittextfeet.getText().toString().equals("")){
+                                } else if(age <18 ){
+                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
+                                }else if(edittextfeet.getText().toString().equals("")){
                                     edittextfeet.setError("Enter Feet");
                                 }else if(edittextInch.getText().toString().equals("")){
                                     edittextInch.setError("Enter Inch");

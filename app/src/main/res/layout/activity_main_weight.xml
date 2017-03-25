@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewResult"
             android:gravity="center"
-            android:textColor="#000000"
+            android:textColor="@color/colorPrimary"
             android:layout_marginTop="20dp"
             android:textSize="20sp"
             android:layout_gravity="center"

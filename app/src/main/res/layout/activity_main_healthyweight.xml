@@ -184,7 +184,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:textColor="#089931"
+                    android:textColor="@color/colorPrimary"
                     android:layout_weight="1" />
             </LinearLayout>
             <View

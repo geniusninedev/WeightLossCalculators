@@ -286,7 +286,7 @@
                     android:id="@+id/textViewBoerLeanBodyMass"
                     android:gravity="center"
                     android:textSize="18sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:layout_weight="1" />
             </LinearLayout>
@@ -316,7 +316,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorPrimary"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -346,7 +346,7 @@
                     android:id="@+id/textViewHumeLeanBodyMass"
                     android:gravity="center"
                     android:textSize="18sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:layout_weight="1" />
             </LinearLayout>

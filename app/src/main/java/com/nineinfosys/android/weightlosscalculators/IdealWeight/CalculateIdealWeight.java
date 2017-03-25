@@ -38,6 +38,7 @@ public class CalculateIdealWeight {
     public int calculateIdealWeightResult() {
         int idealweight=0;
         if (Gender.equals("Male")) {
+
             idealweight = (height - 100 - ((height - 150) / 4));
         } else{
             idealweight = (height - 100 - ((height - 150) / 2));

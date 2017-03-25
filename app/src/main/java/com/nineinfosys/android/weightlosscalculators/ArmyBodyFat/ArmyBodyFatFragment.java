@@ -92,7 +92,8 @@ public class ArmyBodyFatFragment extends Fragment {
                             edittextHipFeet.setVisibility(View.GONE);
                             edittextHipInch.setVisibility(View.GONE);
                             imageViewHip.setVisibility(View.GONE);
-                        } else {
+                        }
+                        else {
                             imageViewGender.setImageResource(R.drawable.gender_f);
                             textHip.setVisibility(View.VISIBLE);
                             edittextHipFeet.setVisibility(View.VISIBLE);

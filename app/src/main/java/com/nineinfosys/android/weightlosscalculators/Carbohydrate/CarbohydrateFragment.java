@@ -1,6 +1,7 @@
 package com.nineinfosys.android.weightlosscalculators.Carbohydrate;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -38,7 +39,7 @@ public class CarbohydrateFragment extends Fragment {
     ImageView imageViewGender,imageViewHeight,imageViewWeight;
     private RadioGroup radioGroupSex,radioGroupHeight,radioGroupWeight;
     private RadioButton radioButtonSex,radioButtonHeight,radioButtonWeight;
-    TextView textViewMainTainWeight,textViewCalorieslosehaifkg,textViewCaloriesloseOneKg,textViewCaloriesgainhaifkg,textViewCaloriesgainonekg;
+    TextView textViewMainTainWeight,textViewCalorieslosehaifkg,textViewCaloriesloseOneKg,textViewCaloriesgainhaifkg,textViewCaloriesgainonekg,textViewCalorie;
     Spinner spinneractivity;
 
     @Override
@@ -83,7 +84,7 @@ public class CarbohydrateFragment extends Fragment {
 
         // attaching data adapter to spinner
         spinneractivity.setAdapter(dataAdapter);
-
+        textViewCalorie= (TextView) v.findViewById(R.id.textViewCalorie);
         textViewMainTainWeight = (TextView) v.findViewById(R.id.textViewMainTainWeight);
         textViewCalorieslosehaifkg = (TextView) v.findViewById(R.id.textViewCalorieslosehaifkg);
         textViewCaloriesloseOneKg= (TextView) v.findViewById(R.id.textViewCaloriesloseOneKg);
@@ -344,14 +345,15 @@ public class CarbohydrateFragment extends Fragment {
         float resultMaintainWeight,resultlosehaifkg,resultloseOneKg,resultgainhaifkg,resultGainOneKg;
         DecimalFormat f = new DecimalFormat("##.00");
         resultMaintainWeight = calculateBMR.Sedentary() ;
-        textViewMainTainWeight.setText(f.format(resultMaintainWeight));
+        textViewCalorie.setText(f.format(resultMaintainWeight)+"Calories");
+        textViewMainTainWeight.setText("You need "+f.format(resultMaintainWeight)+" Calories/day to maintain your weight. You should take "+f.format(((resultMaintainWeight/3.75)*40)/100)+"(40%)- "+f.format(((resultMaintainWeight/3.75)*75)/100)+"(75%)grams of carbohydrate for your energy needs. (55% ="+f.format(((resultMaintainWeight/3.75)*55)/100)+"grams, 65% ="+f.format(((resultMaintainWeight/3.75)*65)/100)+"grams)");
         resultlosehaifkg=calculateBMR.LoseHaifKg();
-        textViewCalorieslosehaifkg.setText(f.format(resultlosehaifkg));
+        textViewCalorieslosehaifkg.setText("You need "+f.format(resultlosehaifkg)+" Calories/day to lose 0.5 kg per week. You should take "+f.format(((resultlosehaifkg/3.75)*40)/100)+"(40%)- "+f.format(((resultlosehaifkg/3.75)*75)/100)+"(75%)grams of carbohydrate for your energy needs. (55% ="+f.format(((resultlosehaifkg/3.75)*55)/100)+"grams, 65% ="+f.format(((resultlosehaifkg/3.75)*65)/100)+"grams)");
         resultloseOneKg=calculateBMR.LoseOnekg();
-        textViewCaloriesloseOneKg.setText(f.format(resultloseOneKg));
+        textViewCaloriesloseOneKg.setText("You need "+f.format(resultloseOneKg)+" Calories/day to lose 1 kg per week. You should take "+f.format(((resultloseOneKg/3.75)*40)/100)+"(40%)- "+f.format(((resultloseOneKg/3.75)*75)/100)+"(75%)grams of carbohydrate for your energy needs. (55% ="+f.format(((resultloseOneKg/3.75)*55)/100)+"grams, 65% ="+f.format(((resultloseOneKg/3.75)*65)/100)+"grams)");
         resultgainhaifkg=calculateBMR.GainHaifKg();
-        textViewCaloriesgainhaifkg.setText(f.format(resultgainhaifkg));
+        textViewCaloriesgainhaifkg.setText("You need "+f.format(resultgainhaifkg)+" Calories/day to gain 0.5 kg per week. You should take "+f.format(((resultgainhaifkg/3.75)*40)/100)+"(40%)- "+f.format(((resultgainhaifkg/3.75)*75)/100)+"(75%)grams of carbohydrate for your energy needs. (55% ="+f.format(((resultgainhaifkg/3.75)*55)/100)+"grams, 65% ="+f.format(((resultgainhaifkg/3.75)*65)/100)+"grams)");
         resultGainOneKg=calculateBMR.GainOnekg();
-        textViewCaloriesgainonekg.setText(f.format(resultGainOneKg));
+        textViewCaloriesgainonekg.setText("You need "+f.format(resultGainOneKg)+" Calories/day to gain 1 kg per week. You should take "+f.format(((resultGainOneKg/3.75)*40)/100)+"(40%)- "+f.format(((resultGainOneKg/3.75)*75)/100)+"(75%)grams of carbohydrate for your energy needs. (55% ="+f.format(((resultGainOneKg/3.75)*55)/100)+"grams, 65% ="+f.format(((resultGainOneKg/3.75)*65)/100)+"grams)");
     }
 }
