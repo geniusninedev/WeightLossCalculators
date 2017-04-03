@@ -49,12 +49,7 @@
 
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
-        </activity  >
-
-
-
-
-
+        </activity >
         <activity android:name=".Login.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
 

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 
@@ -28,11 +31,12 @@ import java.text.DecimalFormat;
 public class IdealWeightFragment extends Fragment {
     //View Declarations
     EditText  editTextHeight,edittextfeet,edittextInch;
-    Button buttonCalculate;
+    Button buttonCalculate,buttonMoreInfo;
     ImageView imageViewGender,imageViewHeight;
     TextView textViewIdealWeight;
     private RadioGroup radioGroupSex,radioGroupHeight;
     private RadioButton radioButtonSex,radioButtonHeight;
+    WebView Introwebview;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main_ideal_weight, null);
@@ -51,7 +55,30 @@ public class IdealWeightFragment extends Fragment {
         imageViewGender = (ImageView) v.findViewById(R.id.imageViewGender);
         imageViewHeight = (ImageView) v.findViewById(R.id.imageViewHeight);
         buttonCalculate = (Button) v.findViewById(R.id.buttonCalculate);
+        buttonMoreInfo = (Button) v.findViewById(R.id.buttonMoreInfo);
         textViewIdealWeight = (TextView) v.findViewById(R.id.textViewIdealWeight);
+
+
+        buttonMoreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //alert Dialog Declaration For More Infomation
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                alertDialogBuilderMoreInfo.setTitle("More Info:");
+                Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
+                WebSettings IntroWebSettings = Introwebview.getSettings();
+                IntroWebSettings.setBuiltInZoomControls(true);
+                IntroWebSettings.setJavaScriptEnabled(true);
+                Introwebview.setWebViewClient(new WebViewClient());
+                Introwebview.loadUrl("file:///android_res/raw/idealweight.html");
+                alertDialogBuilderMoreInfo.setView(alertLayoutMoreInfo);
+                final AlertDialog alertDialogMoreInfo = alertDialogBuilderMoreInfo.create();
+                alertDialogMoreInfo.show();
+            }
+        });
+
 
         //alert Dialog Declaration For Gender
         final LayoutInflater inflaterGender = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -195,5 +222,11 @@ public class IdealWeightFragment extends Fragment {
         textViewIdealWeight.setText(f.format(resultIdealWeight)+" KG");
 
     }
+    public class WebViewClient extends android.webkit.WebViewClient {
 
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+    }
 }

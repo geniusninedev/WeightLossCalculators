@@ -96,7 +96,20 @@
             android:title="Weight Conversion" />
 
     </group>
+    <group android:id="@+id/grp15" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/Protein"
+            android:icon="@drawable/btn_protein"
+            android:title="Protein" />
 
+    </group>
+    <group android:id="@+id/grp16" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/FoodNutritionTable"
+            android:icon="@drawable/btn_food_nutrition_table"
+            android:title="Food Nutrition Table" />
+
+    </group>
         <item
             android:id="@+id/Communicate"
             android:title="Communicate"   >

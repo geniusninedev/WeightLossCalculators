@@ -87,21 +87,25 @@ public class ArmyBodyFat {
     public String interpretArmyBodyFat() {
 
         if (gender.equals("Male")) {
-            if ((int) Math.ceil(AmryBodyFat) <= 18) {
-                return "You meet the Department of Defense goal";
-            }else if ((int) Math.ceil(AmryBodyFat) > 18) {
-                return "You Need To Lose Weight";
-            } else {
+            if((int) Math.ceil(AmryBodyFat) < 15){
                 return "You Need To Increase Weight";
             }
-        } else {
-            if ((int) Math.ceil(AmryBodyFat) <= 26) {
+           else if ((int) Math.ceil(AmryBodyFat) >= 18 &&(int) Math.ceil(AmryBodyFat) <= 25) {
                 return "You meet the Department of Defense goal";
-            }else if ((int) Math.ceil(AmryBodyFat) > 26) {
+            }else if ((int) Math.ceil(AmryBodyFat) > 25) {
                 return "You Need To Lose Weight";
             } else {
-
+                return "Please Enter Correct Values";
+            }
+        } else {
+            if((int) Math.ceil(AmryBodyFat) < 26){
                 return "You Need To Increase Weight";
+            } else if ((int) Math.ceil(AmryBodyFat) >= 26 &&(int) Math.ceil(AmryBodyFat) <= 32) {
+                return "You meet the Department of Defense goal";
+            }else if ((int) Math.ceil(AmryBodyFat) > 32) {
+                return "You Need To Lose Weight";
+            } else {
+                return "Please Enter Correct Values";
             }
         }
 

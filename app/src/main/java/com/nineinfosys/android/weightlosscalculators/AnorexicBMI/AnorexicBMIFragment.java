@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,11 +31,12 @@ public class AnorexicBMIFragment extends Fragment {
 
     //View Declarations
     EditText editTextAge, editTextHeight, editTextWeight,edittextfeet,edittextInch,edittextWeightInLb,edittextWeightInST,edittextWeightInSTLb;
-    Button buttonCalculate;
+    Button buttonCalculate,buttonMoreInfo;
     ImageView imageViewGender,imageViewHeight,imageViewWeight;
     private RadioGroup radioGroupSex,radioGroupHeight,radioGroupWeight;
     private RadioButton radioButtonSex,radioButtonHeight,radioButtonWeight;
     TextView textViewBMI,textViewBMIInterpret;
+    WebView Introwebview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,9 +67,31 @@ public class AnorexicBMIFragment extends Fragment {
         imageViewHeight = (ImageView)v. findViewById(R.id.imageViewHeight);
         imageViewWeight = (ImageView) v.findViewById(R.id.imageViewWeight);
         buttonCalculate = (Button) v.findViewById(R.id.buttonCalculate);
+        buttonMoreInfo = (Button) v.findViewById(R.id.buttonMoreInfo);
         textViewBMI = (TextView) v.findViewById(R.id.textViewBMI);
         textViewBMIInterpret = (TextView) v.findViewById(R.id.textViewBMIInterpret);
-        
+
+
+
+        buttonMoreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //alert Dialog Declaration For More Infomation
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                alertDialogBuilderMoreInfo.setTitle("More Info:");
+                Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
+                WebSettings IntroWebSettings = Introwebview.getSettings();
+                IntroWebSettings.setBuiltInZoomControls(true);
+                IntroWebSettings.setJavaScriptEnabled(true);
+                Introwebview.setWebViewClient(new WebViewClient());
+                Introwebview.loadUrl("file:///android_res/raw/anorexicbmi.html");
+                alertDialogBuilderMoreInfo.setView(alertLayoutMoreInfo);
+                final AlertDialog alertDialogMoreInfo = alertDialogBuilderMoreInfo.create();
+                alertDialogMoreInfo.show();
+            }
+        });
 
         //alert Dialog Declaration For Gender
         final LayoutInflater inflaterGender = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -203,14 +228,22 @@ public class AnorexicBMIFragment extends Fragment {
                 InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 int age= (int) Float.parseFloat(editTextAge.getText().toString().trim());
+                if (age < 18) {
+                    if(radioGroupSex.getCheckedRadioButtonId() == -1){
+                        Toast.makeText(getActivity(),"Please Select Gender as Children",Toast.LENGTH_LONG).show();
+                    } else if(radioGroupHeight.getCheckedRadioButtonId() == -1 ) {
+                        Toast.makeText(getActivity(), "Please Select Height Unit", Toast.LENGTH_LONG).show();
+                    }else if(radioGroupWeight.getCheckedRadioButtonId() == -1 ){
+                        Toast.makeText(getActivity(), "Please Select Weight Unit", Toast.LENGTH_LONG).show();
+                    }else{
+                        AnorexicBMIMethods();
+                    }
+                }
                 //Default case Calculation
-                if (radioGroupSex.getCheckedRadioButtonId() == -1&& radioGroupHeight.getCheckedRadioButtonId() == -1 && radioGroupWeight.getCheckedRadioButtonId() == -1) {
+                else if (radioGroupSex.getCheckedRadioButtonId() == -1&& radioGroupHeight.getCheckedRadioButtonId() == -1 && radioGroupWeight.getCheckedRadioButtonId() == -1) {
                     //Validation for Edittext  if is blank
                     if (editTextAge.getText().toString().equals("")) {
                         editTextAge.setError("Enter Age");
-                    } else if(age <18 ){
-                        Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
-
                     }else if (editTextHeight.getText().toString().equals("")) {
                         editTextHeight.setError("Enter Height");
                     } else if (editTextWeight.getText().toString().equals("")) {
@@ -228,107 +261,7 @@ public class AnorexicBMIFragment extends Fragment {
                         Toast.makeText(getActivity(), "Please Select Weight Unit", Toast.LENGTH_LONG).show();
                     }
                     else {
-                        if(radioButtonHeight.getText().toString().trim().equals("CM")) {
-                            if(radioButtonWeight.getText().toString().trim().equals("KG")) {
-                                //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if(age <18 ){
-                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
-
-                                }else if (editTextHeight.getText().toString().equals("")) {
-                                    editTextHeight.setError("Enter Height");
-                                } else if (editTextWeight.getText().toString().equals("")) {
-                                    editTextWeight.setError("Enter Weight");
-                                } else {
-                                    calculateAnorexic(Float.parseFloat(editTextHeight.getText().toString().trim()), Float.parseFloat(editTextWeight.getText().toString().trim()), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
-                                }
-                            } else if(radioButtonWeight.getText().toString().trim().equals("LB")) {
-                                //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if(age <18 ){
-                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
-
-                                }else if (editTextHeight.getText().toString().equals("")) {
-                                    editTextHeight.setError("Enter Height");
-                                } else if (edittextWeightInLb.getText().toString().equals("")) {
-                                    edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
-                                } else {
-                                    calculateAnorexic(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim())* (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
-                                }
-                            }
-                            else {
-                                //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if(age <18 ){
-                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
-
-                                }else if (editTextHeight.getText().toString().equals("")) {
-                                    editTextHeight.setError("Enter Height");
-                                } else if (edittextWeightInST.getText().toString().equals("")) {
-                                    edittextWeightInST.setError("Enter Weight in ST (Stone)");
-                                }  else if (edittextWeightInSTLb.getText().toString().equals("")) {
-                                    edittextWeightInSTLb.setError("Enter Weight In Lb (Pounds)");
-                                }
-                                else {
-                                    calculateAnorexic(Float.parseFloat(editTextHeight.getText().toString().trim()), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim()))*(6.350))+((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim()))*(0.454))), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
-                                }
-                            }
-                        }else {
-                            if (radioButtonWeight.getText().toString().trim().equals("KG")) {
-                                //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if(age <18 ){
-                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
-
-                                }else if(edittextfeet.getText().toString().equals("")){
-                                    edittextfeet.setError("Enter Feet");
-                                }else if(edittextInch.getText().toString().equals("")){
-                                    edittextInch.setError("Enter Inch");
-                                }else if (editTextWeight.getText().toString().equals("")) {
-                                    editTextWeight.setError("Enter Weight");
-                                } else {
-                                    calculateAnorexic( (float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), Float.parseFloat(editTextWeight.getText().toString().trim()), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
-                                }
-                            } else if (radioButtonWeight.getText().toString().trim().equals("LB")) {
-                                //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                }else if(age <18 ){
-                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
-
-                                }else if(edittextfeet.getText().toString().equals("")){
-                                    edittextfeet.setError("Enter Feet");
-                                }else if(edittextInch.getText().toString().equals("")){
-                                    edittextInch.setError("Enter Inch");
-                                } else if (edittextWeightInLb.getText().toString().equals("")) {
-                                    edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
-                                } else {
-                                    calculateAnorexic((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim()) * (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
-                                }
-                            } else {
-                                //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if(age <18 ){
-                                    Toast.makeText(getActivity(),"Please Select Children As A Gender",Toast.LENGTH_LONG).show();
-
-                                }else if(edittextfeet.getText().toString().equals("")){
-                                    edittextfeet.setError("Enter Feet");
-                                }else if(edittextInch.getText().toString().equals("")){
-                                    edittextInch.setError("Enter Inch");
-                                } else if (edittextWeightInST.getText().toString().equals("")) {
-                                    edittextWeightInST.setError("Enter Weight in ST (Stone)");
-                                } else if (edittextWeightInSTLb.getText().toString().equals("")) {
-                                    edittextWeightInSTLb.setError("Enter Weight In Lb (Pounds)");
-                                } else {
-                                    calculateAnorexic((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim())) * (6.350)) + ((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim())) * (0.454))), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
-                                }
-                            }
-                        }
+                        AnorexicBMIMethods();
                     }
                 }
             }
@@ -339,7 +272,92 @@ public class AnorexicBMIFragment extends Fragment {
 
         return v;
     }
+    public void AnorexicBMIMethods(){
+        if(radioButtonHeight.getText().toString().trim().equals("CM")) {
+            if(radioButtonWeight.getText().toString().trim().equals("KG")) {
+                //Validation for Edittext  if is blank
+                if (editTextAge.getText().toString().equals("")) {
+                    editTextAge.setError("Enter Age");
+                }else if (editTextHeight.getText().toString().equals("")) {
+                    editTextHeight.setError("Enter Height");
+                } else if (editTextWeight.getText().toString().equals("")) {
+                    editTextWeight.setError("Enter Weight");
+                } else {
+                    calculateAnorexic(Float.parseFloat(editTextHeight.getText().toString().trim()), Float.parseFloat(editTextWeight.getText().toString().trim()), Float.parseFloat(editTextAge.getText().toString().trim()),  radioButtonSex.getText().toString().trim());
+                }
+            } else if(radioButtonWeight.getText().toString().trim().equals("LB")) {
+                //Validation for Edittext  if is blank
+                if (editTextAge.getText().toString().equals("")) {
+                    editTextAge.setError("Enter Age");
+                }else if (editTextHeight.getText().toString().equals("")) {
+                    editTextHeight.setError("Enter Height");
+                } else if (edittextWeightInLb.getText().toString().equals("")) {
+                    edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
+                } else {
+                    calculateAnorexic(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim())* (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
+                }
+            }
+            else {
+                //Validation for Edittext  if is blank
+                if (editTextAge.getText().toString().equals("")) {
+                    editTextAge.setError("Enter Age");
+                } else if (editTextHeight.getText().toString().equals("")) {
+                    editTextHeight.setError("Enter Height");
+                } else if (edittextWeightInST.getText().toString().equals("")) {
+                    edittextWeightInST.setError("Enter Weight in ST (Stone)");
+                }  else if (edittextWeightInSTLb.getText().toString().equals("")) {
+                    edittextWeightInSTLb.setError("Enter Weight In Lb (Pounds)");
+                }
+                else {
+                    calculateAnorexic(Float.parseFloat(editTextHeight.getText().toString().trim()), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim()))*(6.350))+((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim()))*(0.454))), Float.parseFloat(editTextAge.getText().toString().trim()),  radioButtonSex.getText().toString().trim());
+                }
+            }
+        }else {
+            if (radioButtonWeight.getText().toString().trim().equals("KG")) {
+                //Validation for Edittext  if is blank
+                if (editTextAge.getText().toString().equals("")) {
+                    editTextAge.setError("Enter Age");
+                }else if(edittextfeet.getText().toString().equals("")){
+                    edittextfeet.setError("Enter Feet");
+                }else if(edittextInch.getText().toString().equals("")){
+                    edittextInch.setError("Enter Inch");
+                }else if (editTextWeight.getText().toString().equals("")) {
+                    editTextWeight.setError("Enter Weight");
+                } else {
+                    calculateAnorexic( (float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), Float.parseFloat(editTextWeight.getText().toString().trim()), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim());
+                }
+            } else if (radioButtonWeight.getText().toString().trim().equals("LB")) {
+                //Validation for Edittext  if is blank
+                if (editTextAge.getText().toString().equals("")) {
+                    editTextAge.setError("Enter Age");
+                }else if(edittextfeet.getText().toString().equals("")){
+                    edittextfeet.setError("Enter Feet");
+                }else if(edittextInch.getText().toString().equals("")){
+                    edittextInch.setError("Enter Inch");
+                } else if (edittextWeightInLb.getText().toString().equals("")) {
+                    edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
+                } else {
+                    calculateAnorexic((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim()) * (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()),  radioButtonSex.getText().toString().trim());
+                }
+            } else {
+                //Validation for Edittext  if is blank
+                if (editTextAge.getText().toString().equals("")) {
+                    editTextAge.setError("Enter Age");
+                }else if(edittextfeet.getText().toString().equals("")){
+                    edittextfeet.setError("Enter Feet");
+                }else if(edittextInch.getText().toString().equals("")){
+                    edittextInch.setError("Enter Inch");
+                } else if (edittextWeightInST.getText().toString().equals("")) {
+                    edittextWeightInST.setError("Enter Weight in ST (Stone)");
+                } else if (edittextWeightInSTLb.getText().toString().equals("")) {
+                    edittextWeightInSTLb.setError("Enter Weight In Lb (Pounds)");
+                } else {
+                    calculateAnorexic((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim())) * (6.350)) + ((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim())) * (0.454))), Float.parseFloat(editTextAge.getText().toString().trim()),  radioButtonSex.getText().toString().trim());
+                }
+            }
+        }
 
+    }
     public void calculateAnorexic(float height,float weight,float age,String gender){
         CalculateBMI calculateBMI = new CalculateBMI( height/ 100,weight, age,gender);
         float resultBMI = calculateBMI.calculateBMIResult();
@@ -351,5 +369,13 @@ public class AnorexicBMIFragment extends Fragment {
         textViewBMIInterpret.setTextColor(interpretBMIColorResult);
         
     }
+    public class WebViewClient extends android.webkit.WebViewClient {
 
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+    }
 }
+
+

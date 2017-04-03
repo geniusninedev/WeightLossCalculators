@@ -1,8 +1,5 @@
 package com.nineinfosys.android.weightlosscalculators;
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -28,9 +24,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
+
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -49,15 +44,16 @@ import com.nineinfosys.android.weightlosscalculators.DashBord.DashBord;
 import com.nineinfosys.android.weightlosscalculators.DashBord.GetApp;
 import com.nineinfosys.android.weightlosscalculators.FAT.FATFragment;
 import com.nineinfosys.android.weightlosscalculators.FatIntake.FatIntakeFragment;
+import com.nineinfosys.android.weightlosscalculators.FoodNutritionTable.FoodNutritionTable;
 import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.IdealWeight.IdealWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.LeanBodyMass.LeanBodyMassFragment;
 import com.nineinfosys.android.weightlosscalculators.Login.Contacts;
 import com.nineinfosys.android.weightlosscalculators.Login.LoginActivity;
-import com.nineinfosys.android.weightlosscalculators.Weight.WeightFragment;
+import com.nineinfosys.android.weightlosscalculators.Protein.ProteinFragment;
+import com.nineinfosys.android.weightlosscalculators.Weight.WeightLossConversionList;
 import com.squareup.okhttp.OkHttpClient;
 
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -204,7 +200,19 @@ public class MainActivityDrawer extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.Weight) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new WeightFragment()).commit();
+                    fragmentTransaction.replace(R.id.containerView, new WeightLossConversionList()).commit();
+                    /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Weight.ForumMainActivity.class);
+                    startActivity(intent);*/
+                }
+                if (menuItem.getItemId() == R.id.Protein) {
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerView, new ProteinFragment()).commit();
+                    /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Weight.ForumMainActivity.class);
+                    startActivity(intent);*/
+                }
+                if (menuItem.getItemId() == R.id.FoodNutritionTable) {
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerView, new FoodNutritionTable()).commit();
                     /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Weight.ForumMainActivity.class);
                     startActivity(intent);*/
                 }

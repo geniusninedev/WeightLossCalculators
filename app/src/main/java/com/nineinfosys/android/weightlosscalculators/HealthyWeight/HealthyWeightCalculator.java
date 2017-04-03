@@ -124,8 +124,69 @@ public class HealthyWeightCalculator {
         return healthyweight;
     }
     public  String HeightInFTAndIn(float heightinft,float heightinin){
-
-        if(heightinft==4 && heightinin ==10){
+        if(heightinft<2 && heightinin <4){
+            healthyweight="Standards Not Available For Your Height";
+        } else if(heightinft==2 && heightinin ==4){
+            healthyweight="1 to 28 lbs.";
+        }else if(heightinft==2&& heightinin ==5){
+            healthyweight="4 to 31 lbs.";
+        }else if(heightinft== 2 && heightinin ==6){
+            healthyweight="7 to 34 lbs.";
+        }else if(heightinft==2 && heightinin ==7){
+            healthyweight="10 to 37 lbs.";
+        }else if(heightinft==2 && heightinin ==8){
+            healthyweight="13 to 40 lbs.";
+        }else if(heightinft==2 && heightinin ==9){
+            healthyweight="16 to 43 lbs.";
+        }else if(heightinft==2 && heightinin ==10){
+            healthyweight="19 to 46 lbs.";
+        }else if(heightinft==2 && heightinin ==11){
+            healthyweight="22 to 49 lbs.";
+        } else if(heightinft==3 && heightinin ==0){
+            healthyweight="25 to 52 lbs.";
+        } else if(heightinft==3&& heightinin ==1){
+            healthyweight="28 to 55 lbs.";
+        }else if(heightinft==3 && heightinin ==2){
+            healthyweight="31 to 58 lbs.";
+        }else if(heightinft==3 && heightinin ==3){
+            healthyweight="34 to 61 lbs.";
+        }else if(heightinft==3 && heightinin ==4){
+            healthyweight="37 to 64 lbs.";
+        }else if(heightinft==3 && heightinin ==5){
+            healthyweight="40 to 67 lbs.";
+        }else if(heightinft==3 && heightinin ==6){
+            healthyweight="43 to 70 lbs.";
+        }else if(heightinft==3 && heightinin ==7){
+            healthyweight="46 to 73 lbs.";
+        }else if(heightinft==3 && heightinin ==8){
+            healthyweight="49 to 76 lbs.";
+        }else if(heightinft==3 && heightinin ==9){
+            healthyweight="52 to 79 lbs.";
+        }else if(heightinft==3 && heightinin ==10){
+            healthyweight="55 to 82 lbs.";
+        }else if(heightinft==3 && heightinin ==11){
+            healthyweight="58 to 85 lbs.";
+        }else if(heightinft==4 && heightinin ==0){
+            healthyweight="61 to 88 lbs.";
+        }else if(heightinft==4 && heightinin ==1){
+            healthyweight="65 to 91 lbs.";
+        }else if(heightinft==4 && heightinin ==2){
+            healthyweight="67 to 94 lbs.";
+        }else if(heightinft==4 && heightinin ==3){
+            healthyweight="70 to 97 lbs.";
+        }else if(heightinft==4 && heightinin ==4){
+            healthyweight="73 to 100 lbs.";
+        }else if(heightinft==4 && heightinin ==5){
+            healthyweight="76 to 103 lbs.";
+        }else if(heightinft==4 && heightinin ==6){
+            healthyweight="79 to 106 lbs.";
+        }else if(heightinft==4 && heightinin ==7){
+            healthyweight="82 to 109 lbs.";
+        }else if(heightinft==4 && heightinin ==8){
+            healthyweight="85 to 112 lbs.";
+        }else if(heightinft==4 && heightinin ==9){
+            healthyweight="88 to 115 lbs.";
+        } else if(heightinft==4 && heightinin ==10){
             healthyweight="91 to 118 lbs.";
         }else if(heightinft==4 && heightinin ==11){
             healthyweight="94 to 123 lbs.";
@@ -163,8 +224,22 @@ public class HealthyWeightCalculator {
             healthyweight="152 to 199 lbs.";
         }else if(heightinft==6 && heightinin ==4){
             healthyweight="156 to 204 lbs.";
-        }else{
-            healthyweight="Your Height Not In Standards";
+        } else if(heightinft==6 && heightinin ==5){
+            healthyweight="159 to 208 lbs.";
+        }else if(heightinft==6 && heightinin ==6){
+            healthyweight="162 to 212 lbs.";
+        }else if(heightinft==6 && heightinin ==7){
+            healthyweight="165 to 216 lbs.";
+        }else if(heightinft==6 && heightinin ==8){
+            healthyweight="168 to 220 lbs.";
+        }else if(heightinft==6 && heightinin ==9){
+            healthyweight="171 to 224 lbs.";
+        }else if(heightinft==6 && heightinin ==10){
+            healthyweight="174 to 228 lbs.";
+        }else if(heightinft==7 && heightinin ==0){
+            healthyweight="177 to 232 lbs.";
+        } else{
+            healthyweight="Standards Not Available For Your Height";
         }
 
         return healthyweight;
