@@ -158,19 +158,19 @@ public class CalculateBMI {
     public String interpretFAT() {
 
         if (gender.equals("Male")) {
-            if (FAT_percentage < 14) {
+            if (FAT_percentage >= 6 && FAT_percentage <= 13) {
                 return "Athletes";
-            } else if (FAT_percentage < 24) {
+            } else if (FAT_percentage >= 14 && FAT_percentage <= 17) {
 
                 return "Fitness";
-            } else if (FAT_percentage < 31) {
+            } else if (FAT_percentage >= 18 && FAT_percentage <= 25) {
 
                 return "Acceptable";
             } else {
 
                 return "Obese";
             }
-        }else if(gender.equals("Children")){
+        } else if(gender.equals("Children")){
             if (FAT_percentage < 6) {
                 return "Athletes";
             } else if (FAT_percentage < 17) {
@@ -185,12 +185,12 @@ public class CalculateBMI {
             }
         }
         else {
-            if (FAT_percentage < 6) {
+            if (FAT_percentage >= 14 && FAT_percentage <= 20) {
                 return "Athletes";
-            } else if (FAT_percentage < 17) {
+            } else if (FAT_percentage >= 21 && FAT_percentage <= 24) {
 
                 return "Fitness";
-            } else if (FAT_percentage < 25) {
+            } else if (FAT_percentage >= 25 && FAT_percentage <= 31) {
 
                 return "Acceptable";
             } else {
@@ -203,16 +203,16 @@ public class CalculateBMI {
     public int interpretFATCOLOR() {
 
         if (gender == "Female") {
-            if (FAT_percentage < 20) {
+            if (FAT_percentage >= 14 && FAT_percentage <= 20) {
                 return Color.parseColor("#dc9b22");
-            } else if (FAT_percentage < 24) {
+            } else if (FAT_percentage >= 21 && FAT_percentage <= 24) {
                 return Color.parseColor("#059733");
-            } else if (FAT_percentage < 31) {
+            } else if (FAT_percentage >= 25 && FAT_percentage <= 31) {
                 return Color.parseColor("#059733");
             } else {
                 return Color.parseColor("#c41919");
             }
-        } else if(gender.equals("Children")) {
+        }  else if(gender.equals("Children")) {
             if (FAT_percentage < 6) {
                 return Color.parseColor("#dc9b22");
             } else if (FAT_percentage < 17) {
@@ -222,13 +222,12 @@ public class CalculateBMI {
             } else {
                 return Color.parseColor("#c41919");
             }
-        }
-            else {
-            if (FAT_percentage < 6) {
+        } else {
+            if (FAT_percentage >= 6 && FAT_percentage <= 13) {
                 return Color.parseColor("#dc9b22");
-            } else if (FAT_percentage < 17) {
+            } else if (FAT_percentage >= 14 && FAT_percentage <= 17) {
                 return Color.parseColor("#059733");
-            } else if (FAT_percentage < 25) {
+            } else if (FAT_percentage >= 18 && FAT_percentage <= 25) {
                 return Color.parseColor("#059733");
             } else {
                 return Color.parseColor("#c41919");
