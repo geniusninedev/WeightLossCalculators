@@ -40,6 +40,7 @@ import com.nineinfosys.android.weightlosscalculators.BMR.BMRFragment;
 import com.nineinfosys.android.weightlosscalculators.BodyFat.BodyFatFragment;
 import com.nineinfosys.android.weightlosscalculators.Calorie.CalorieFragment;
 import com.nineinfosys.android.weightlosscalculators.Carbohydrate.CarbohydrateFragment;
+import com.nineinfosys.android.weightlosscalculators.Contacts.Contacts;
 import com.nineinfosys.android.weightlosscalculators.DashBord.DashBord;
 import com.nineinfosys.android.weightlosscalculators.DashBord.GetApp;
 import com.nineinfosys.android.weightlosscalculators.FAT.FATFragment;
@@ -48,8 +49,8 @@ import com.nineinfosys.android.weightlosscalculators.FoodNutritionTable.FoodNutr
 import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.IdealWeight.IdealWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.LeanBodyMass.LeanBodyMassFragment;
-import com.nineinfosys.android.weightlosscalculators.Login.Contacts;
-import com.nineinfosys.android.weightlosscalculators.Login.LoginActivity;
+
+import com.nineinfosys.android.weightlosscalculators.LoginActivity.Login;
 import com.nineinfosys.android.weightlosscalculators.Protein.ProteinFragment;
 import com.nineinfosys.android.weightlosscalculators.Weight.WeightLossConversionList;
 import com.squareup.okhttp.OkHttpClient;
@@ -370,7 +371,7 @@ public class MainActivityDrawer extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()==null){
                     Log.e("ForumMainActivity:", "User was null so directed to Login activity");
-                    Intent loginIntent = new Intent(MainActivityDrawer.this, LoginActivity.class);
+                    Intent loginIntent = new Intent(MainActivityDrawer.this, Login.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     finish();
                     startActivity(loginIntent);
