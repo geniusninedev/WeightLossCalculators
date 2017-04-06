@@ -114,7 +114,13 @@ public class WeightLossConversionList extends Fragment {
                 //for hiding keyboard
                 InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                converterCalcualtion();
+                if(editTextvalue.getText().toString().trim().equals("")){
+                    editTextvalue.setError("Enter Value");
+
+                }else{
+                    converterCalcualtion();
+                }
+
             }
         });
 

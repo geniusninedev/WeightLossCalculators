@@ -18,8 +18,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edtvalue"
                 android:layout_weight="1"
-                android:background="@android:drawable/editbox_background"
-                android:text="1"/>
+                android:background="@android:drawable/editbox_background"/>
             <Spinner
                 android:id="@+id/spinnerconversiontype"
                 android:layout_width="150dp"
