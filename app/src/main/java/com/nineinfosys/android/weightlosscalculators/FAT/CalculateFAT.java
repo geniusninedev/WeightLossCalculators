@@ -79,7 +79,6 @@ public class CalculateFAT {
             } else  if (FAT_percentage >= 14 && FAT_percentage <= 20) {
                 return "Athletes";
             } else if (FAT_percentage >= 21 && FAT_percentage <= 24) {
-
                 return "Fitness";
             } else if (FAT_percentage >= 25 && FAT_percentage <= 31) {
                 return "Acceptable";
@@ -93,22 +92,7 @@ public class CalculateFAT {
     }
     // Interpret what FAT COLOR
     public int interpretFATCOLOR() {
-
-        if (gender == "Female") {
-            if (FAT_percentage < 14) {
-                return Color.parseColor("#c41919");
-            } else if (FAT_percentage >= 14 && FAT_percentage <= 20) {
-                return Color.parseColor("#dc9b22");
-            } else if (FAT_percentage >= 21 && FAT_percentage <= 24) {
-                return Color.parseColor("#059733");
-            } else if (FAT_percentage >= 25 && FAT_percentage <= 31) {
-                return Color.parseColor("#059733");
-            } else if (FAT_percentage > 31) {
-                return Color.parseColor("#c41919");
-            }else{
-                return Color.parseColor("#c41919");
-            }
-        } else {
+        if (gender.equals("Male")) {
             if (FAT_percentage < 6) {
                 return Color.parseColor("#c41919");
             } else if (FAT_percentage >= 6 && FAT_percentage <= 13) {
@@ -118,6 +102,20 @@ public class CalculateFAT {
             } else if (FAT_percentage >= 18 && FAT_percentage <= 25) {
                 return Color.parseColor("#059733");
             } else if (FAT_percentage > 25){
+                return Color.parseColor("#c41919");
+            }else{
+                return Color.parseColor("#c41919");
+            }
+        } else {
+            if (FAT_percentage < 14) {
+                return Color.parseColor("#c41919");
+            } else if (FAT_percentage >= 14 && FAT_percentage <= 20) {
+                return Color.parseColor("#dc9b22");
+            } else if (FAT_percentage >= 21 && FAT_percentage <= 24) {
+                return Color.parseColor("#059733");
+            } else if (FAT_percentage >= 25 && FAT_percentage <= 31) {
+                return Color.parseColor("#059733");
+            } else if (FAT_percentage > 31) {
                 return Color.parseColor("#c41919");
             }else{
                 return Color.parseColor("#c41919");

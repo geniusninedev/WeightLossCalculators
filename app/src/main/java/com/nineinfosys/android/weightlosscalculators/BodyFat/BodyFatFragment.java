@@ -221,7 +221,7 @@ public class BodyFatFragment extends Fragment {
                 if (radioGroupSex.getCheckedRadioButtonId() == -1) {
                     //Validation for Edittext  if is blank
                     if (editTextAge.getText().toString().equals("")) {
-                        editTextHeight.setError("Enter Age");
+                        editTextAge.setError("Enter Age");
                     } else if (editTextHeight.getText().toString().equals("")) {
                         editTextHeight.setError("Enter Height");
                     } else if (editTextWaist.getText().toString().equals("")) {
@@ -243,7 +243,7 @@ public class BodyFatFragment extends Fragment {
                             switch (radioButtonUnit.getText().toString().trim()){
                                 case "CM":
                                     if (editTextAge.getText().toString().equals("")) {
-                                        editTextHeight.setError("Enter Age");
+                                        editTextAge.setError("Enter Age");
                                     } else if (editTextHeight.getText().toString().equals("")) {
                                         editTextHeight.setError("Enter Height");
                                     } else if (editTextWaist.getText().toString().equals("")) {
@@ -256,7 +256,7 @@ public class BodyFatFragment extends Fragment {
                                     break;
                                 case "FT+IN":
                                     if (editTextAge.getText().toString().equals("")) {
-                                        editTextHeight.setError("Enter Age");
+                                        editTextAge.setError("Enter Age");
                                     } else if (edittextHeightFeet.getText().toString().equals("")) {
                                         edittextHeightFeet.setError("Enter Height in Feet");
                                     } else if (edittextHeightInch.getText().toString().equals("")) {
@@ -282,7 +282,7 @@ public class BodyFatFragment extends Fragment {
                                 case "CM":
                                 //Validation for Edittext  if is blank
                                 if (editTextAge.getText().toString().equals("")) {
-                                    editTextHeight.setError("Enter Age");
+                                    editTextAge.setError("Enter Age");
                                 } else if (editTextHeight.getText().toString().equals("")) {
                                     editTextHeight.setError("Enter Height");
                                 } else if (editTextWaist.getText().toString().equals("")) {
@@ -297,7 +297,7 @@ public class BodyFatFragment extends Fragment {
                                     break;
                                 case "FT+IN":
                                     if (editTextAge.getText().toString().equals("")) {
-                                        editTextHeight.setError("Enter Age");
+                                        editTextAge.setError("Enter Age");
                                     } else if (edittextHeightFeet.getText().toString().equals("")) {
                                         edittextHeightFeet.setError("Enter Height in Feet");
                                     } else if (edittextHeightInch.getText().toString().equals("")) {
