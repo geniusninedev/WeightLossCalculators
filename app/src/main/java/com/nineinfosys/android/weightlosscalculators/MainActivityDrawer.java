@@ -24,9 +24,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,11 +48,14 @@ import com.nineinfosys.android.weightlosscalculators.DashBord.GetApp;
 import com.nineinfosys.android.weightlosscalculators.FAT.FATFragment;
 import com.nineinfosys.android.weightlosscalculators.FatIntake.FatIntakeFragment;
 import com.nineinfosys.android.weightlosscalculators.FoodNutritionTable.FoodNutritionTable;
+import com.nineinfosys.android.weightlosscalculators.Forum.ForumActivity;
+import com.nineinfosys.android.weightlosscalculators.Forum.NewPostActivity;
 import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.IdealWeight.IdealWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.LeanBodyMass.LeanBodyMassFragment;
 
 import com.nineinfosys.android.weightlosscalculators.LoginActivity.Login;
+import com.nineinfosys.android.weightlosscalculators.LoginActivity.User;
 import com.nineinfosys.android.weightlosscalculators.Protein.ProteinFragment;
 import com.nineinfosys.android.weightlosscalculators.Weight.WeightLossConversionList;
 import com.squareup.okhttp.OkHttpClient;
@@ -109,7 +114,13 @@ public class MainActivityDrawer extends AppCompatActivity {
          * Setup click events on the Navigation View Items.
          */
 
-
+        // Button launches NewPostActivity
+        findViewById(R.id.fab_Forum).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivityDrawer.this, ForumActivity.class));
+            }
+        });
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -366,6 +377,7 @@ public class MainActivityDrawer extends AppCompatActivity {
     ///Authentication with firebase
     private void authenticate(){
         firebaseAuth = FirebaseAuth.getInstance();
+        final User user = new User();
         firebaseAuthListner =  new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -378,6 +390,7 @@ public class MainActivityDrawer extends AppCompatActivity {
 
                 }
                 else {
+
                     if (!checkPermission()) {
                         requestPermission();
                     } else {
