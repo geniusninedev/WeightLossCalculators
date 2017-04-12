@@ -293,7 +293,7 @@ public class Login extends AppCompatActivity {
                                 //---- HERE YOU SEND THE EMAIL
                               //  mUser.sendEmailVerification();
                                 Toast.makeText(Login.this,"Verify your email first...",Toast.LENGTH_LONG).show();
-
+                                FirebaseAuth.getInstance().signOut();
                             }
 
 
