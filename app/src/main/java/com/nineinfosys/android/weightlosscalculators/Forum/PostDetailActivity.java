@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -139,6 +140,12 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void postComment() {
+        final String title = mCommentField.getText().toString();
+        // Title is required
+        if (TextUtils.isEmpty(title)) {
+            mCommentField.setError("Required");
+            return;
+        }
         final String uid = getUid();
         FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Users").child(uid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
