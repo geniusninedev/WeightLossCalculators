@@ -67,6 +67,8 @@ public class FATFragment  extends Fragment {
                 WebSettings IntroWebSettings = Introwebview.getSettings();
                 IntroWebSettings.setBuiltInZoomControls(true);
                 IntroWebSettings.setJavaScriptEnabled(true);
+                IntroWebSettings.setUseWideViewPort(true);
+                IntroWebSettings.setLoadWithOverviewMode(true);
                 Introwebview.setWebViewClient(new WebViewClient());
                 Introwebview.loadUrl("file:///android_res/raw/fat.html");
                 alertDialogBuilderMoreInfo.setView(alertLayoutMoreInfo);

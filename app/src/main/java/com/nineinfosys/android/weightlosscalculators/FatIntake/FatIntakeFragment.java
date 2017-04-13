@@ -106,6 +106,8 @@ public class FatIntakeFragment extends Fragment {
                 WebSettings IntroWebSettings = Introwebview.getSettings();
                 IntroWebSettings.setBuiltInZoomControls(true);
                 IntroWebSettings.setJavaScriptEnabled(true);
+                IntroWebSettings.setUseWideViewPort(true);
+                IntroWebSettings.setLoadWithOverviewMode(true);
                 Introwebview.setWebViewClient(new WebViewClient());
                 Introwebview.loadUrl("file:///android_res/raw/fatintack_two.html");
                 alertDialogBuilderMoreInfo.setView(alertLayoutMoreInfo);

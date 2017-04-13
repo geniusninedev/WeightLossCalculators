@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,8 @@ public class WeightLossConversionList extends Fragment {
                 WebSettings IntroWebSettings = Introwebview.getSettings();
                 IntroWebSettings.setBuiltInZoomControls(true);
                 IntroWebSettings.setJavaScriptEnabled(true);
+                IntroWebSettings.setUseWideViewPort(true);
+                IntroWebSettings.setLoadWithOverviewMode(true);
                 Introwebview.setWebViewClient(new WebViewClient());
                 Introwebview.loadUrl("file:///android_res/raw/weight.html");
                 alertDialogBuilderMoreInfo.setView(alertLayoutMoreInfo);
@@ -133,7 +136,6 @@ public class WeightLossConversionList extends Fragment {
         //calculation method call for amortization
        return  v;
     }
-
 
 
 

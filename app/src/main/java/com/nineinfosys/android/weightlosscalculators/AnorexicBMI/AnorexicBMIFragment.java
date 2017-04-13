@@ -84,7 +84,6 @@ public class AnorexicBMIFragment extends Fragment {
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
                 IntroWebSettings.setBuiltInZoomControls(true);
-                IntroWebSettings.setJavaScriptEnabled(true);
                 Introwebview.setWebViewClient(new WebViewClient());
                 Introwebview.loadUrl("file:///android_res/raw/anorexicbmi.html");
                 alertDialogBuilderMoreInfo.setView(alertLayoutMoreInfo);
