@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.nineinfosys.android.weightlosscalculators.Forum.ForumActivity;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 import org.xmlpull.v1.XmlPullParser;
@@ -58,7 +59,12 @@ public class DashBord extends Fragment {
             }
         });
 
-
+        v.findViewById(R.id.fab_Forum).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ForumActivity.class));
+            }
+        });
         return v;
     }
 

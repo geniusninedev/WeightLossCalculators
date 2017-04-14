@@ -24,9 +24,11 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.firebase.client.Firebase;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 import com.google.android.gms.auth.api.Auth;
@@ -70,9 +72,10 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Firebase.setAndroidContext(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
-
+        AppEventsLogger.activateApp(this);
         mAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Users");//.child(getString(R.string.facebook_data));
         mDataBaseGoogle = FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Users");//.child(getString(R.string.google_data));

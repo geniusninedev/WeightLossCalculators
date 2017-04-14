@@ -4,9 +4,9 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'g9'
+            keyAlias 'geniusnine'
             keyPassword 'genius9'
-            storeFile file('D:/key/g9.jks')
+            storeFile file('D:/key/geniusnine.jks')
             storePassword 'genius9'
         }
     }
