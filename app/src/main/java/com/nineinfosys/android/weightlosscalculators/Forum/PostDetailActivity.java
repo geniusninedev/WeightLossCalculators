@@ -147,7 +147,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             return;
         }
         final String uid = getUid();
-        FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Users").child(uid)
+        FirebaseDatabase.getInstance().getReference().child("Users").child(uid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

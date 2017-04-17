@@ -72,10 +72,11 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Firebase.setAndroidContext(this);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+      /*  Firebase.setAndroidContext(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());*/
         setContentView(R.layout.activity_login);
-        AppEventsLogger.activateApp(this);
+        /*AppEventsLogger.activateApp(this);*/
+
         mAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference().child("Users");
         mDataBaseGoogle = FirebaseDatabase.getInstance().getReference().child("Users");

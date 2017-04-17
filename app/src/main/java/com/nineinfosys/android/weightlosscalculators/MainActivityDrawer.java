@@ -93,9 +93,12 @@ public class MainActivityDrawer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         setContentView(R.layout.drawermain);
 
+        AppEventsLogger.activateApp(this);
         /**
          *Setup the DrawerLayout and NavigationView
          */
