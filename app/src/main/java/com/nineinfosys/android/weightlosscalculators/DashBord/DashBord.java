@@ -59,12 +59,7 @@ public class DashBord extends Fragment {
             }
         });
 
-        v.findViewById(R.id.fab_Forum).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ForumActivity.class));
-            }
-        });
+
         return v;
     }
 

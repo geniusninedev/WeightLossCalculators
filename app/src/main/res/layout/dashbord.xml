@@ -6,12 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivityDrawer">
-    <FrameLayout
-        android:id="@+id/containerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#ffffff">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -31,18 +25,5 @@
                 android:divider="@android:color/transparent"
                 android:id="@+id/list" />
         </LinearLayout>
-
-
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_Forum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_forum_white_24dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"/>
-
-    </FrameLayout>
 
 </RelativeLayout>

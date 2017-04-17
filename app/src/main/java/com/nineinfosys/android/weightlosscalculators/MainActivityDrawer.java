@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -74,7 +75,7 @@ public class MainActivityDrawer extends AppCompatActivity {
     FragmentTransaction mFragmentTransaction;
 
    public Toolbar toolbar;
-
+    private FloatingActionButton fab;
     private static final int PERMISSION_REQUEST_CODE = 200;
 
     ///Azure Database connection for contact uploading
@@ -114,13 +115,18 @@ public class MainActivityDrawer extends AppCompatActivity {
          * Setup click events on the Navigation View Items.
          */
 
-        // Button launches NewPostActivity
-        findViewById(R.id.fab_Forum).setOnClickListener(new View.OnClickListener() {
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+              //  Toast.makeText(MainActivityDrawer.this,"This Is Under Consturtion", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(MainActivityDrawer.this, ForumActivity.class));
+                /*Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
+                startActivity(intent);*/
             }
         });
+
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
