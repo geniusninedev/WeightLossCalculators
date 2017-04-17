@@ -45,7 +45,7 @@ public class NewPostActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add New Post");
         // [START initialize_database_ref]
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id));
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END initialize_database_ref]
 
         mTitleField = (EditText) findViewById(R.id.field_title);
@@ -139,7 +139,7 @@ public class NewPostActivity extends BaseActivity {
     private void writeNewPost(String userId, String username, String title, String body, String messageTime, String messageDate) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        String key = mDatabase.child("Forum").child("posts").push().getKey();
+        String key = mDatabase.child(getString(R.string.app_id)).child("Forum").child("posts").push().getKey();
         Post post = new Post(userId, username, title, body,messageTime,messageDate);
         Map<String, Object> postValues = post.toMap();
 
@@ -147,7 +147,7 @@ public class NewPostActivity extends BaseActivity {
         childUpdates.put("/posts/" + key, postValues);
         childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
-        mDatabase.child("Forum").updateChildren(childUpdates);
+        mDatabase.child(getString(R.string.app_id)).child("Forum").updateChildren(childUpdates);
     }
     // [END write_fan_out]
 }

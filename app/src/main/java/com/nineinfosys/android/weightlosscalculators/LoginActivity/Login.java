@@ -77,8 +77,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         AppEventsLogger.activateApp(this);
         mAuth = FirebaseAuth.getInstance();
-        mDataBase = FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Users");//.child(getString(R.string.facebook_data));
-        mDataBaseGoogle = FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Users");//.child(getString(R.string.google_data));
+        mDataBase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDataBaseGoogle = FirebaseDatabase.getInstance().getReference().child("Users");
 
         email = (EditText) findViewById(R.id.edit_text_email_id);
         password = (EditText) findViewById(R.id.edit_text_password);

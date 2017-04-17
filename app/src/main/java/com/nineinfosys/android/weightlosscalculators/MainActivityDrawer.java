@@ -28,7 +28,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
+import com.firebase.client.Firebase;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -90,6 +93,7 @@ public class MainActivityDrawer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.drawermain);
 
         /**
