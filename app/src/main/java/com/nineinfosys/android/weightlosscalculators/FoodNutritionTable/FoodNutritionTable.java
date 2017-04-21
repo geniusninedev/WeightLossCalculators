@@ -1,17 +1,22 @@
 package com.nineinfosys.android.weightlosscalculators.FoodNutritionTable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.nineinfosys.android.weightlosscalculators.BMI.BMIFragment;
+import com.nineinfosys.android.weightlosscalculators.FAT.FATCalculator;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 
@@ -19,41 +24,48 @@ import com.nineinfosys.android.weightlosscalculators.R;
  * Created by Dev on 01-04-2017.
  */
 
-public class FoodNutritionTable extends Fragment {
+public class FoodNutritionTable extends AppCompatActivity {
     TextView textViewA,textViewB,textViewC,textViewD,textViewE,textViewF,textViewG,textViewH,textViewI,textViewJ,textViewK,textViewL,textViewM,textViewN,textViewO,textViewP,textViewQ,textViewR,textViewS,textViewT,textViewUToZ;
     WebView Introwebview;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_food_nutrition_table, null);
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Food Nutrition Table");
-        textViewA=(TextView)v.findViewById(R.id.textViewA);
-        textViewB=(TextView)v.findViewById(R.id.textViewB);
-        textViewC=(TextView)v.findViewById(R.id.textViewC);
-        textViewD=(TextView)v.findViewById(R.id.textViewD);
-        textViewE=(TextView)v.findViewById(R.id.textViewE);
-        textViewF=(TextView)v.findViewById(R.id.textViewF);
-        textViewG=(TextView)v.findViewById(R.id.textViewG);
-        textViewH=(TextView)v.findViewById(R.id.textViewH);
-        textViewI=(TextView)v.findViewById(R.id.textViewI);
-        textViewJ=(TextView)v.findViewById(R.id.textViewJ);
-        textViewK=(TextView)v.findViewById(R.id.textViewK);
-        textViewL=(TextView)v.findViewById(R.id.textViewL);
-        textViewM=(TextView)v.findViewById(R.id.textViewM);
-        textViewN=(TextView)v.findViewById(R.id.textViewN);
-        textViewO=(TextView)v.findViewById(R.id.textViewO);
-        textViewP=(TextView)v.findViewById(R.id.textViewP);
-        textViewQ=(TextView)v.findViewById(R.id.textViewQ);
-        textViewR=(TextView)v.findViewById(R.id.textViewR);
-        textViewS=(TextView)v.findViewById(R.id.textViewS);
-        textViewT=(TextView)v.findViewById(R.id.textViewT);
-        textViewUToZ=(TextView)v.findViewById(R.id.textViewUToZ);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_food_nutrition_table);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+
+        //((MainActivityDrawer) getActivity()).toolbar.setTitle("Food Nutrition Table");
+        textViewA=(TextView)findViewById(R.id.textViewA);
+        textViewB=(TextView)findViewById(R.id.textViewB);
+        textViewC=(TextView)findViewById(R.id.textViewC);
+        textViewD=(TextView)findViewById(R.id.textViewD);
+        textViewE=(TextView)findViewById(R.id.textViewE);
+        textViewF=(TextView)findViewById(R.id.textViewF);
+        textViewG=(TextView)findViewById(R.id.textViewG);
+        textViewH=(TextView)findViewById(R.id.textViewH);
+        textViewI=(TextView)findViewById(R.id.textViewI);
+        textViewJ=(TextView)findViewById(R.id.textViewJ);
+        textViewK=(TextView)findViewById(R.id.textViewK);
+        textViewL=(TextView)findViewById(R.id.textViewL);
+        textViewM=(TextView)findViewById(R.id.textViewM);
+        textViewN=(TextView)findViewById(R.id.textViewN);
+        textViewO=(TextView)findViewById(R.id.textViewO);
+        textViewP=(TextView)findViewById(R.id.textViewP);
+        textViewQ=(TextView)findViewById(R.id.textViewQ);
+        textViewR=(TextView)findViewById(R.id.textViewR);
+        textViewS=(TextView)findViewById(R.id.textViewS);
+        textViewT=(TextView)findViewById(R.id.textViewT);
+        textViewUToZ=(TextView)findViewById(R.id.textViewUToZ);
         textViewA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -70,9 +82,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -89,9 +101,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -108,9 +120,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -127,9 +139,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -146,9 +158,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -165,9 +177,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -184,9 +196,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -203,9 +215,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -222,9 +234,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -241,9 +253,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -260,9 +272,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -279,9 +291,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -298,9 +310,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -317,9 +329,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -336,9 +348,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -355,9 +367,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -374,9 +386,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -393,9 +405,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -412,9 +424,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -431,9 +443,9 @@ public class FoodNutritionTable extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FoodNutritionTable.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -446,7 +458,7 @@ public class FoodNutritionTable extends Fragment {
                 alertDialogMoreInfo.show();
             }
         });
-        return v;
+
     }
     public class WebViewClient extends android.webkit.WebViewClient {
 
@@ -454,5 +466,22 @@ public class FoodNutritionTable extends Fragment {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return super.shouldOverrideUrlLoading(view, url);
         }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(FoodNutritionTable.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

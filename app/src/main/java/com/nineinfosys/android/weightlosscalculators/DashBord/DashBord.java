@@ -5,7 +5,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
@@ -15,6 +20,7 @@ import android.widget.ListView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.nineinfosys.android.weightlosscalculators.FoodNutritionTable.FoodNutritionTable;
 import com.nineinfosys.android.weightlosscalculators.Forum.ForumActivity;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
@@ -29,38 +35,58 @@ import java.util.ArrayList;
  * Created by Dev on 12-01-2017.
  */
 
-public class DashBord extends Fragment {
+public class DashBord extends AppCompatActivity {
     public NewsAdapter newsAdapter;
     private ListView listViewNews;
     private ArrayList<String> headlines;
     private ArrayList<String> links;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dashbord, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.dashbord);
 
-        MobileAds.initialize(getActivity(), getString(R.string.ads_app_id));
-        AdView mAdView = (AdView) v.findViewById(R.id.adViewMainPageNews);
+        MobileAds.initialize(DashBord.this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adViewMainPageNews);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Feeds");
+        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+     //   ((MainActivityDrawer) DashBord.this).toolbar.setTitle("Feeds");
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
 
         doSomething();
-        newsAdapter = new NewsAdapter(getActivity(), R.layout.row_list_category );
-        listViewNews = (ListView)v.findViewById(R.id.list);
+        newsAdapter = new NewsAdapter(DashBord.this, R.layout.row_list_category );
+        listViewNews = (ListView)findViewById(R.id.list);
         listViewNews.setAdapter(newsAdapter);
         listViewNews.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = links.get(position);
-                Intent news = new Intent(getActivity(), ShowFeeds.class);
+                Intent news = new Intent(DashBord.this, ShowFeeds.class);
                 news.putExtra("url", item) ;
                 startActivity(news);
             }
         });
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshItems();
+            }
+        });
+    }
 
-        return v;
+    void refreshItems() {
+        onItemsLoadComplete();
+    }
+
+    void onItemsLoadComplete() {
+        doSomething();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     private AsyncTask<Void, Void, Void> doSomething(){
@@ -94,7 +120,7 @@ public class DashBord extends Fragment {
                                             Log.e("Headlines ", headline);
                                             headlines.add(headline);
                                             try{
-                                                getActivity().runOnUiThread(new Runnable() {
+                                                runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
                                                         newsAdapter.add(headline);
@@ -123,7 +149,7 @@ public class DashBord extends Fragment {
                                         }catch(Exception e){
                                             Log.e("ERROR_PARSER", e.toString());
                                         }
-                                        getActivity().runOnUiThread(new Runnable() {
+                                        runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
 
@@ -172,5 +198,20 @@ public class DashBord extends Fragment {
     }
 
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(DashBord.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

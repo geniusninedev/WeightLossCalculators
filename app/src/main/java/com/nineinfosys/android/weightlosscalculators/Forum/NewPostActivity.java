@@ -1,9 +1,12 @@
 package com.nineinfosys.android.weightlosscalculators.Forum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +17,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nineinfosys.android.weightlosscalculators.DashBord.DashBord;
 import com.nineinfosys.android.weightlosscalculators.LoginActivity.User;
+import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 import com.nineinfosys.android.weightlosscalculators.models.Post;
 
@@ -44,6 +49,8 @@ public class NewPostActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add New Post");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END initialize_database_ref]
@@ -150,4 +157,22 @@ public class NewPostActivity extends BaseActivity {
         mDatabase.child(getString(R.string.app_id)).child("Forum").updateChildren(childUpdates);
     }
     // [END write_fan_out]
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(NewPostActivity.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

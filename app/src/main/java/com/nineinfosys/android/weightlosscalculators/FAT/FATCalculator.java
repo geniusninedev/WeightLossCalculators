@@ -1,10 +1,15 @@
 package com.nineinfosys.android.weightlosscalculators.FAT;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,13 +27,13 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.nineinfosys.android.weightlosscalculators.AnorexicBMI.AnorexicBMIFragment;
+import com.nineinfosys.android.weightlosscalculators.IdealWeight.IdealWeightCalculator;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 
 import java.text.DecimalFormat;
 
-public class FATFragment  extends Fragment {
+public class FATCalculator extends AppCompatActivity {
     //View Declarations
      EditText editTextAge,editTextBMI;
      Button buttonCalculate,buttonMoreInfo;
@@ -38,30 +43,35 @@ public class FATFragment  extends Fragment {
     private RadioButton radioButtonSex;
     WebView Introwebview;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_main_fat, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_fat);
 
-        MobileAds.initialize(getActivity(), getString(R.string.ads_app_id));
-        AdView mAdView = (AdView) v.findViewById(R.id.adViewMainPagefat);
+        MobileAds.initialize(FATCalculator.this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adViewMainPagefat);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("FAT");
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+       // ((MainActivityDrawer) FATCalculator).toolbar.setTitle("FAT");
         //Initialising Views
-        editTextAge=(EditText)v.findViewById(R.id.editTextAge);
-        editTextBMI=(EditText)v.findViewById(R.id.editTextBMI);
-        imageViewGender = (ImageView) v.findViewById(R.id.imageViewGender);
-        buttonCalculate = (Button) v.findViewById(R.id.buttonCalculate);
-        buttonMoreInfo = (Button) v.findViewById(R.id.buttonMoreInfo);
-        textViewFAT = (TextView) v.findViewById(R.id.textViewFAT);
-        textViewFATInterpret = (TextView) v.findViewById(R.id.textViewFATInterpret);
+        editTextAge=(EditText)findViewById(R.id.editTextAge);
+        editTextBMI=(EditText)findViewById(R.id.editTextBMI);
+        imageViewGender = (ImageView) findViewById(R.id.imageViewGender);
+        buttonCalculate = (Button) findViewById(R.id.buttonCalculate);
+        buttonMoreInfo = (Button) findViewById(R.id.buttonMoreInfo);
+        textViewFAT = (TextView) findViewById(R.id.textViewFAT);
+        textViewFATInterpret = (TextView) findViewById(R.id.textViewFATInterpret);
         buttonMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FATCalculator.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -77,9 +87,9 @@ public class FATFragment  extends Fragment {
             }
         });
         //alert Dialog Declaration For Gender
-        final LayoutInflater inflaterGender = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterGender = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutGender = inflaterGender.inflate(R.layout.dialog, null);
-        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(FATCalculator.this);
         alertDialogBuilderGender.setTitle("Gender :");
         radioGroupSex = (RadioGroup) alertLayoutGender.findViewById(R.id.radioSex);
         alertDialogBuilderGender.setView(alertLayoutGender);
@@ -114,8 +124,8 @@ public class FATFragment  extends Fragment {
             @Override
             public void onClick(View v) {
                 //for hiding keyboard
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 if (radioGroupSex.getCheckedRadioButtonId() == -1) {
                     if (editTextAge.getText().toString().equals("")) {
                         editTextAge.setError("Enter Age");
@@ -127,7 +137,7 @@ public class FATFragment  extends Fragment {
                     }
                 } else {
                     if (radioGroupSex.getCheckedRadioButtonId() == -1) {
-                        Toast.makeText(getActivity(), "Please Select Gender", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FATCalculator.this, "Please Select Gender", Toast.LENGTH_LONG).show();
                     } else {
                         //Validation for Edittext  if is blank
                         if (editTextAge.getText().toString().equals("")) {
@@ -141,11 +151,10 @@ public class FATFragment  extends Fragment {
                 }
             }
         });
-        getActivity().getWindow().setSoftInputMode(
+        getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        return v;
     }
 public void calculateFAT(float age,float bmi,String gender){
     CalculateFAT calculateFAT = new CalculateFAT( age,bmi,gender);
@@ -163,5 +172,22 @@ public void calculateFAT(float age,float bmi,String gender){
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return super.shouldOverrideUrlLoading(view, url);
         }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(FATCalculator.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

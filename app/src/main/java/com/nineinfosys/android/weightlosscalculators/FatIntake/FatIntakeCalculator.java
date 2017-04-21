@@ -1,10 +1,15 @@
 package com.nineinfosys.android.weightlosscalculators.FatIntake;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -24,6 +29,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.nineinfosys.android.weightlosscalculators.FAT.FATCalculator;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 
@@ -31,7 +37,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FatIntakeFragment extends Fragment {
+public class FatIntakeCalculator extends AppCompatActivity {
 
 
     //View Declarations
@@ -45,30 +51,37 @@ public class FatIntakeFragment extends Fragment {
     WebView Introwebview;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_main_fat_intake, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_fat_intake);
 
-        MobileAds.initialize(getActivity(), getString(R.string.ads_app_id));
-        AdView mAdView = (AdView) v.findViewById(R.id.adViewMainPagefatIntake);
+        MobileAds.initialize(FatIntakeCalculator.this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adViewMainPagefatIntake);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Fat Intake");
+       // ((MainActivityDrawer) FatIntakeCalculator.this).toolbar.setTitle("Fat Intake");
         //Initialising Views
-        editTextAge = (EditText) v.findViewById(R.id.editTextAge);
-        editTextHeight = (EditText)v.findViewById(R.id.editTextHeight);
-        edittextfeet = (EditText) v.findViewById(R.id.edittextFeet);
-        edittextInch = (EditText) v.findViewById(R.id.edittextInch);
-        editTextWeight = (EditText) v.findViewById(R.id.editTextWeight);
-        edittextWeightInLb = (EditText) v.findViewById(R.id.edittextWeightInLb);
-        edittextWeightInST = (EditText) v.findViewById(R.id.edittextWeightInST);
-        edittextWeightInSTLb = (EditText) v.findViewById(R.id.edittextWeightInSTLb);
-        imageViewGender = (ImageView) v.findViewById(R.id.imageViewGender);
-        imageViewHeight = (ImageView)v.findViewById(R.id.imageViewHeight);
-        imageViewWeight = (ImageView) v.findViewById(R.id.imageViewWeight);
-        buttonCalculate = (Button) v.findViewById(R.id.buttonCalculate);
-        buttonMoreInfo = (Button) v.findViewById(R.id.buttonMoreInfo);
-        spinneractivity=(Spinner)v.findViewById(R.id.spinneractivity);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+
+        editTextAge = (EditText) findViewById(R.id.editTextAge);
+        editTextHeight = (EditText)findViewById(R.id.editTextHeight);
+        edittextfeet = (EditText) findViewById(R.id.edittextFeet);
+        edittextInch = (EditText) findViewById(R.id.edittextInch);
+        editTextWeight = (EditText) findViewById(R.id.editTextWeight);
+        edittextWeightInLb = (EditText) findViewById(R.id.edittextWeightInLb);
+        edittextWeightInST = (EditText) findViewById(R.id.edittextWeightInST);
+        edittextWeightInSTLb = (EditText) findViewById(R.id.edittextWeightInSTLb);
+        imageViewGender = (ImageView) findViewById(R.id.imageViewGender);
+        imageViewHeight = (ImageView)findViewById(R.id.imageViewHeight);
+        imageViewWeight = (ImageView) findViewById(R.id.imageViewWeight);
+        buttonCalculate = (Button) findViewById(R.id.buttonCalculate);
+        buttonMoreInfo = (Button) findViewById(R.id.buttonMoreInfo);
+        spinneractivity=(Spinner)findViewById(R.id.spinneractivity);
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
@@ -79,28 +92,28 @@ public class FatIntakeFragment extends Fragment {
         categories.add("Extra Active- very hard exercise/sports or physical  job");
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(FatIntakeCalculator.this, android.R.layout.simple_spinner_item, categories);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
         spinneractivity.setAdapter(dataAdapter);
-        textViewCalorie= (TextView) v.findViewById(R.id.textViewCalorie);
-        textViewMainTainWeight = (TextView) v.findViewById(R.id.textViewMainTainWeight);
-        textViewCalorieslosehaifkg = (TextView) v.findViewById(R.id.textViewCalorieslosehaifkg);
-        textViewCaloriesloseOneKg= (TextView) v.findViewById(R.id.textViewCaloriesloseOneKg);
-        textViewCaloriesgainhaifkg= (TextView) v.findViewById(R.id.textViewCaloriesgainhaifkg);
-        textViewCaloriesgainonekg= (TextView) v.findViewById(R.id.textViewCaloriesgainonekg);
+        textViewCalorie= (TextView) findViewById(R.id.textViewCalorie);
+        textViewMainTainWeight = (TextView) findViewById(R.id.textViewMainTainWeight);
+        textViewCalorieslosehaifkg = (TextView) findViewById(R.id.textViewCalorieslosehaifkg);
+        textViewCaloriesloseOneKg= (TextView) findViewById(R.id.textViewCaloriesloseOneKg);
+        textViewCaloriesgainhaifkg= (TextView) findViewById(R.id.textViewCaloriesgainhaifkg);
+        textViewCaloriesgainonekg= (TextView) findViewById(R.id.textViewCaloriesgainonekg);
 
 
         buttonMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(FatIntakeCalculator.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -119,9 +132,9 @@ public class FatIntakeFragment extends Fragment {
 
 
         //alert Dialog Declaration For Gender
-        final LayoutInflater inflaterGender = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterGender = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutGender = inflaterGender.inflate(R.layout.dialog, null);
-        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(FatIntakeCalculator.this);
         alertDialogBuilderGender.setTitle("Gender :");
         radioGroupSex = (RadioGroup) alertLayoutGender.findViewById(R.id.radioSex);
         alertDialogBuilderGender.setView(alertLayoutGender);
@@ -152,9 +165,9 @@ public class FatIntakeFragment extends Fragment {
         });
 
         //alert Dialog Declaration for Height
-        final LayoutInflater inflaterHeight = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterHeight = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutHeight  = inflaterHeight.inflate(R.layout.dialogheight, null);
-        final AlertDialog.Builder alertDialogBuilderHeight = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderHeight = new AlertDialog.Builder(FatIntakeCalculator.this);
         alertDialogBuilderHeight.setTitle("Height In :");
         radioGroupHeight = (RadioGroup) alertLayoutHeight.findViewById(R.id.radioHeight);
         alertDialogBuilderHeight.setView(alertLayoutHeight);
@@ -195,9 +208,9 @@ public class FatIntakeFragment extends Fragment {
         });
 
         //alert Dialog Declaration for Weight
-        final LayoutInflater inflaterWeight = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterWeight = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutWeight  = inflaterWeight.inflate(R.layout.dialogweight, null);
-        final AlertDialog.Builder alertDialogBuilderWeight = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderWeight = new AlertDialog.Builder(FatIntakeCalculator.this);
         alertDialogBuilderWeight.setTitle("Weight In :");
         radioGroupWeight = (RadioGroup) alertLayoutWeight.findViewById(R.id.radioWeight);
         alertDialogBuilderWeight.setView(alertLayoutWeight);
@@ -249,8 +262,8 @@ public class FatIntakeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //for hiding keyboard
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Default case Calculation
                 if (radioGroupSex.getCheckedRadioButtonId() == -1&& radioGroupHeight.getCheckedRadioButtonId() == -1 && radioGroupWeight.getCheckedRadioButtonId() == -1) {
                     //Validation for Edittext  if is blank
@@ -266,11 +279,11 @@ public class FatIntakeFragment extends Fragment {
                 } else {
                     //Validation for radiobutton if not checked
                     if (radioGroupSex.getCheckedRadioButtonId() == -1 ){
-                        Toast.makeText(getActivity(), "Please Select Gender", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FatIntakeCalculator.this, "Please Select Gender", Toast.LENGTH_LONG).show();
                     } else if(radioGroupHeight.getCheckedRadioButtonId() == -1 ) {
-                        Toast.makeText(getActivity(), "Please Select Height Unit", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FatIntakeCalculator.this, "Please Select Height Unit", Toast.LENGTH_LONG).show();
                     }else if(radioGroupWeight.getCheckedRadioButtonId() == -1 ){
-                        Toast.makeText(getActivity(), "Please Select Weight Unit", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FatIntakeCalculator.this, "Please Select Weight Unit", Toast.LENGTH_LONG).show();
                     }
                     else {
                         if(radioButtonHeight.getText().toString().trim().equals("CM")) {
@@ -360,11 +373,10 @@ public class FatIntakeFragment extends Fragment {
                 }
             }
         });
-        getActivity().getWindow().setSoftInputMode(
+        getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        return v;
     }
 
 
@@ -390,5 +402,21 @@ public class FatIntakeFragment extends Fragment {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return super.shouldOverrideUrlLoading(view, url);
         }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(FatIntakeCalculator.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

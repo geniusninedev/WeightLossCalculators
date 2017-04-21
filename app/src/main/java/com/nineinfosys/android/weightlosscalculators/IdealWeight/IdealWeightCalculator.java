@@ -1,12 +1,15 @@
 package com.nineinfosys.android.weightlosscalculators.IdealWeight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
@@ -22,13 +25,12 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 
 import java.text.DecimalFormat;
 
-public class IdealWeightFragment extends Fragment {
+public class IdealWeightCalculator extends AppCompatActivity {
     //View Declarations
     EditText  editTextHeight,edittextfeet,edittextInch;
     Button buttonCalculate,buttonMoreInfo;
@@ -38,34 +40,39 @@ public class IdealWeightFragment extends Fragment {
     private RadioButton radioButtonSex,radioButtonHeight;
     WebView Introwebview;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_main_ideal_weight, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_ideal_weight);
 
-        MobileAds.initialize(getActivity(), getString(R.string.ads_app_id));
-        AdView mAdView = (AdView) v.findViewById(R.id.adViewMainPageidealWeight);
+        MobileAds.initialize(IdealWeightCalculator.this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adViewMainPageidealWeight);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Ideal Weight");
+      //  ((MainActivityDrawer) IdealWeightCalculator.this).toolbar.setTitle("Ideal Weight");
 
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
         //Initialising Views
-        editTextHeight=(EditText)v.findViewById(R.id.editTextHeight);
-        edittextfeet = (EditText)v. findViewById(R.id.edittextFeet);
-        edittextInch = (EditText) v.findViewById(R.id.edittextInch);
-        imageViewGender = (ImageView) v.findViewById(R.id.imageViewGender);
-        imageViewHeight = (ImageView) v.findViewById(R.id.imageViewHeight);
-        buttonCalculate = (Button) v.findViewById(R.id.buttonCalculate);
-        buttonMoreInfo = (Button) v.findViewById(R.id.buttonMoreInfo);
-        textViewIdealWeight = (TextView) v.findViewById(R.id.textViewIdealWeight);
+        editTextHeight=(EditText)findViewById(R.id.editTextHeight);
+        edittextfeet = (EditText) findViewById(R.id.edittextFeet);
+        edittextInch = (EditText) findViewById(R.id.edittextInch);
+        imageViewGender = (ImageView) findViewById(R.id.imageViewGender);
+        imageViewHeight = (ImageView) findViewById(R.id.imageViewHeight);
+        buttonCalculate = (Button) findViewById(R.id.buttonCalculate);
+        buttonMoreInfo = (Button) findViewById(R.id.buttonMoreInfo);
+        textViewIdealWeight = (TextView) findViewById(R.id.textViewIdealWeight);
 
 
         buttonMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(IdealWeightCalculator.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -81,9 +88,9 @@ public class IdealWeightFragment extends Fragment {
 
 
         //alert Dialog Declaration For Gender
-        final LayoutInflater inflaterGender = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterGender = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutGender = inflaterGender.inflate(R.layout.dialog, null);
-        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(IdealWeightCalculator.this);
         alertDialogBuilderGender.setTitle("Gender :");
         radioGroupSex = (RadioGroup) alertLayoutGender.findViewById(R.id.radioSex);
         alertDialogBuilderGender.setView(alertLayoutGender);
@@ -113,9 +120,9 @@ public class IdealWeightFragment extends Fragment {
             }
         });
 //alert Dialog Declaration for Height
-        final LayoutInflater inflaterHeight = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterHeight = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutHeight  = inflaterHeight.inflate(R.layout.dialogheight, null);
-        final AlertDialog.Builder alertDialogBuilderHeight = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderHeight = new AlertDialog.Builder(IdealWeightCalculator.this);
         alertDialogBuilderHeight.setTitle("Height In :");
         radioGroupHeight = (RadioGroup) alertLayoutHeight.findViewById(R.id.radioHeight);
         alertDialogBuilderHeight.setView(alertLayoutHeight);
@@ -159,8 +166,8 @@ public class IdealWeightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //for hiding keyboard
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Default case Calculation
                 if (radioGroupSex.getCheckedRadioButtonId() == -1 && radioGroupHeight.getCheckedRadioButtonId() == -1) {
                     //Validation for Edittext  if is blank
@@ -176,9 +183,9 @@ public class IdealWeightFragment extends Fragment {
                     }
                 } else {
                     if (radioGroupSex.getCheckedRadioButtonId() == -1) {
-                        Toast.makeText(getActivity(), "Please Select Gender", Toast.LENGTH_LONG).show();
+                        Toast.makeText(IdealWeightCalculator.this, "Please Select Gender", Toast.LENGTH_LONG).show();
                     }else if(radioGroupHeight.getCheckedRadioButtonId() == -1 ) {
-                        Toast.makeText(getActivity(), "Please Select Height Unit", Toast.LENGTH_LONG).show();
+                        Toast.makeText(IdealWeightCalculator.this, "Please Select Height Unit", Toast.LENGTH_LONG).show();
                     } else {
                         if(radioButtonHeight.getText().toString().trim().equals("CM")) {
                             //Validation for Edittext  if is blank
@@ -213,11 +220,10 @@ public class IdealWeightFragment extends Fragment {
                 }
             }
         });
-        getActivity().getWindow().setSoftInputMode(
+        getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        return v;
     }
 
     public  void calculateIdealWeigh(int height,String gender){
@@ -233,5 +239,22 @@ public class IdealWeightFragment extends Fragment {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return super.shouldOverrideUrlLoading(view, url);
         }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(IdealWeightCalculator.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -32,41 +32,20 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.firebase.client.Firebase;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
-import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
-import com.nineinfosys.android.weightlosscalculators.AnorexicBMI.AnorexicBMIFragment;
-import com.nineinfosys.android.weightlosscalculators.ArmyBodyFat.ArmyBodyFatFragment;
-import com.nineinfosys.android.weightlosscalculators.BMI.BMIFragment;
-import com.nineinfosys.android.weightlosscalculators.BMR.BMRFragment;
-import com.nineinfosys.android.weightlosscalculators.BodyFat.BodyFatFragment;
-import com.nineinfosys.android.weightlosscalculators.Calorie.CalorieFragment;
-import com.nineinfosys.android.weightlosscalculators.Carbohydrate.CarbohydrateFragment;
+import com.nineinfosys.android.weightlosscalculators.Calculators.CalculatorFragment;
 import com.nineinfosys.android.weightlosscalculators.Contacts.Contacts;
 import com.nineinfosys.android.weightlosscalculators.DashBord.DashBord;
 import com.nineinfosys.android.weightlosscalculators.DashBord.GetApp;
-import com.nineinfosys.android.weightlosscalculators.FAT.FATFragment;
-import com.nineinfosys.android.weightlosscalculators.FatIntake.FatIntakeFragment;
 import com.nineinfosys.android.weightlosscalculators.FoodNutritionTable.FoodNutritionTable;
 import com.nineinfosys.android.weightlosscalculators.Forum.ForumActivity;
-import com.nineinfosys.android.weightlosscalculators.Forum.NewPostActivity;
-import com.nineinfosys.android.weightlosscalculators.HealthyWeight.HealthyWeightFragment;
-import com.nineinfosys.android.weightlosscalculators.IdealWeight.IdealWeightFragment;
-import com.nineinfosys.android.weightlosscalculators.LeanBodyMass.LeanBodyMassFragment;
-
 import com.nineinfosys.android.weightlosscalculators.LoginActivity.Login;
 import com.nineinfosys.android.weightlosscalculators.LoginActivity.User;
-import com.nineinfosys.android.weightlosscalculators.Protein.ProteinFragment;
-import com.nineinfosys.android.weightlosscalculators.Weight.WeightLossConversionList;
-import com.squareup.okhttp.OkHttpClient;
-
-import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.WRITE_CONTACTS;
 
@@ -116,7 +95,7 @@ public class MainActivityDrawer extends AppCompatActivity {
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mNavigationView.setItemIconTintList(null);
-        mFragmentTransaction.replace(R.id.containerView, new DashBord()).commit();
+        mFragmentTransaction.replace(R.id.containerView, new CalculatorFragment()).commit();
 
         /**
          * Setup click events on the Navigation View Items.
@@ -138,108 +117,15 @@ public class MainActivityDrawer extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
+
                 if (menuItem.getItemId() == R.id.DashBord) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new DashBord()).commit();
-
-                }
-                if (menuItem.getItemId() == R.id.BMI){
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new BMIFragment()).commit();
-                    /*  Intent intent=new Intent(MainActivityDrawer.this,com.nineinfosys.android.weightlosscalculators.BMI.ForumMainActivity.class);
-                       startActivity(intent);*/
-                }
-                if (menuItem.getItemId() == R.id.BMR) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new BMRFragment()).commit();
-
-                   /* Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.BMR.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
-                if (menuItem.getItemId() == R.id.IdealWeight) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new IdealWeightFragment()).commit();
-
-                   /* Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.IdealWeight.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
-                if (menuItem.getItemId() == R.id.FAT) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new FATFragment()).commit();
-                  /*  Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.FAT.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
-                if (menuItem.getItemId() == R.id.AnorexicBMI) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new AnorexicBMIFragment()).commit();
-                    /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.AnorexicBMI.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
-                if (menuItem.getItemId() == R.id.ArmyBodyFat){
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new ArmyBodyFatFragment()).commit();
-                 /*   Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.ArmyBodyFat.ForumMainActivity.class);
-                    startActivity(intent);*/
-
-                }if (menuItem.getItemId() == R.id.BodyFat) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new BodyFatFragment()).commit();
-                   /* Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.BodyFat.ForumMainActivity.class);
-                    startActivity(intent);*/
-
-                }
-                if (menuItem.getItemId() == R.id.Calorie) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new CalorieFragment()).commit();
-          /*          Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Calorie.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
-                if (menuItem.getItemId() == R.id.Carbohydrate) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new CarbohydrateFragment()).commit();
-                 /*   Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Carbohydrate.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
-
-                if (menuItem.getItemId() == R.id.FatIntake) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new FatIntakeFragment()).commit();
-             /*      Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.FatIntake.ForumMainActivity.class);
-                    startActivity(intent);*/
-
-                }
-                if (menuItem.getItemId() == R.id.HealthyWeight) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new HealthyWeightFragment()).commit();
-                  /*  Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.HealthyWeight.ForumMainActivity.class);
-                    startActivity(intent);*/
-
-                }
-                if (menuItem.getItemId() == R.id.LeanBodyMass) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new LeanBodyMassFragment()).commit();
-                 /*   Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.LeanBodyMass.ForumMainActivity.class);
-                    startActivity(intent);*/
+                   startActivity(new Intent(MainActivityDrawer.this,DashBord.class));
 
                 }
 
-                if (menuItem.getItemId() == R.id.Weight) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new WeightLossConversionList()).commit();
-                    /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Weight.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
-                if (menuItem.getItemId() == R.id.Protein) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new ProteinFragment()).commit();
-                    /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Weight.ForumMainActivity.class);
-                    startActivity(intent);*/
-                }
                 if (menuItem.getItemId() == R.id.FoodNutritionTable) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new FoodNutritionTable()).commit();
-                    /*Intent intent=new Intent(MainActivityDrawer.this, com.nineinfosys.android.weightlosscalculators.Weight.ForumMainActivity.class);
-                    startActivity(intent);*/
+                    startActivity(new Intent(MainActivityDrawer.this,FoodNutritionTable.class));
+
                 }
                 if (menuItem.getItemId() == R.id.MoreApps) {
 

@@ -6,10 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivityDrawer">
-        <LinearLayout
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#059733"
+        app:title="@string/app_name_dashboard"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adViewMainPageNews"
                 android:layout_width="fill_parent"
@@ -19,11 +29,17 @@
                 ads:adSize="SMART_BANNER"
                 ads:adUnitId="@string/banner_ad_unit_id">
             </com.google.android.gms.ads.AdView>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@android:color/transparent"
                 android:id="@+id/list" />
+        </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
 
 </RelativeLayout>

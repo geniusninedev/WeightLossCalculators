@@ -22,4 +22,20 @@
 
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec condimentum ante, quis mattis mi. Proin ut rhoncus libero, ac euismod neque. Ut suscipit, enim a facilisis consequat, orci lacus venenatis orci, at ultricies orci nulla sed ex. In condimentum viverra velit, eget feugiat libero imperdiet vel. Aenean pretium, lectus vitae bibendum bibendum, diam turpis convallis eros, quis tristique leo sapien at ipsum. Praesent eu odio id nulla lobortis auctor. Donec eget dolor eget nisl euismod commodo vel a lacus. Quisque ut justo vitae urna pharetra accumsan. Etiam dignissim neque iaculis mauris viverra, blandit rhoncus odio porttitor. Phasellus nibh arcu.</string>
 
+    <string name="app_name_anorexic">Anorexic BMI</string>
+    <string name="app_name_army">Army Body Fat</string>
+    <string name="app_name_Bmi">BMI Calculator</string>
+    <string name="app_name_Bmr">BMR Calculator</string>
+    <string name="app_name_bodyfat">Body Fat Calculator</string>
+    <string name="app_name_calorie">Calorie Calculator</string>
+    <string name="app_name_carbohydrate">Carbohydrate Calculator</string>
+    <string name="app_name_ideal">Ideal Weight Calculator</string>
+    <string name="app_name_fat">FAT Calculator</string>
+    <string name="app_name_fatintake">FatIntake Calculator</string>
+    <string name="app_name_lean">Lean Body Mass Calculator</string>
+    <string name="app_name_healthy">Healthy Weight Calculator</string>
+    <string name="app_name_weight">Weight Unit Conversion</string>
+    <string name="app_name_protine">Protein Calculator</string>
+    <string name="app_name_foodtable">Food Nutrition Table</string>
+    <string name="app_name_dashboard">Feeds</string>
 </resources>

@@ -7,6 +7,10 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.nineinfosys.android.weightlosscalculators.FatIntake.FatIntakeCalculator;
 import com.nineinfosys.android.weightlosscalculators.R;
 
 /**
@@ -18,6 +22,12 @@ public class ShowFeeds extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_feeds);
+
+        MobileAds.initialize(ShowFeeds.this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adViewnews);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         WebView w1 = (WebView) findViewById(R.id.webView);
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");

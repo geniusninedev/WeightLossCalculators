@@ -1,105 +1,87 @@
-package com.nineinfosys.android.weightlosscalculators.Protein;
+package com.nineinfosys.android.weightlosscalculators.LeanBodyMass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.nineinfosys.android.weightlosscalculators.Calorie.CalculateBMR;
-import com.nineinfosys.android.weightlosscalculators.LeanBodyMass.LeanBodyMassFragment;
+import com.nineinfosys.android.weightlosscalculators.Calorie.CalorieCalculator;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ProteinFragment extends Fragment {
-
+public class LeanBodyMassCalculator extends AppCompatActivity {
 
     //View Declarations
-    EditText editTextAge, editTextHeight, editTextWeight,edittextfeet,edittextInch,edittextWeightInLb,edittextWeightInST,edittextWeightInSTLb;
+    EditText editTextHeight, editTextWeight,edittextfeet,edittextInch,edittextWeightInLb,edittextWeightInST,edittextWeightInSTLb;
     Button buttonCalculate,buttonMoreInfo;
     ImageView imageViewGender,imageViewHeight,imageViewWeight;
     private RadioGroup radioGroupSex,radioGroupHeight,radioGroupWeight;
     private RadioButton radioButtonSex,radioButtonHeight,radioButtonWeight;
-    TextView textViewADA,textViewCDC;
-    Spinner spinneractivity;
+    TextView textViewBoerLeanBodyMass,textViewJamesLeanBodyMass,textViewHumeLeanBodyMass;
     WebView Introwebview;
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_main_protein, null);
-
-        MobileAds.initialize(getActivity(), getString(R.string.ads_app_id));
-        AdView mAdView = (AdView) v.findViewById(R.id.adViewMainPageCalorie);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_lean_body_mass);
+        MobileAds.initialize(LeanBodyMassCalculator.this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adViewMainPageLean);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Protein");
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+
+       // ((MainActivityDrawer) LeanBodyMassCalculator.this).toolbar.setTitle("Lean Body Mass");
         //Initialising Views
-        editTextAge = (EditText) v.findViewById(R.id.editTextAge);
-        editTextHeight = (EditText) v.findViewById(R.id.editTextHeight);
-        edittextfeet = (EditText) v.findViewById(R.id.edittextFeet);
-        edittextInch = (EditText) v.findViewById(R.id.edittextInch);
-        editTextWeight = (EditText)v.findViewById(R.id.editTextWeight);
-        edittextWeightInLb = (EditText) v.findViewById(R.id.edittextWeightInLb);
-        edittextWeightInST = (EditText)v.findViewById(R.id.edittextWeightInST);
-        edittextWeightInSTLb = (EditText) v.findViewById(R.id.edittextWeightInSTLb);
-        imageViewGender = (ImageView) v.findViewById(R.id.imageViewGender);
-        imageViewHeight = (ImageView) v.findViewById(R.id.imageViewHeight);
-        imageViewWeight = (ImageView) v.findViewById(R.id.imageViewWeight);
-        buttonCalculate = (Button) v.findViewById(R.id.buttonCalculate);
-        buttonMoreInfo = (Button) v.findViewById(R.id.buttonMoreInfo);
-        spinneractivity=(Spinner)v.findViewById(R.id.spinneractivity);
-
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Sedentary-little or no exercise");
-        categories.add("Lightly Active-exercise/sports 1-3 times/week");
-        categories.add("Moderatetely Active-exercise/sports 3-5 times/week");
-        categories.add("Very Active-hard exercise/sports 6-7 times/week");
-        categories.add("Extra Active- very hard exercise/sports or physical  job");
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinneractivity.setAdapter(dataAdapter);
-        textViewADA = (TextView) v.findViewById(R.id.textViewADA);
-        textViewCDC = (TextView) v.findViewById(R.id.textViewCDC);
-
-
+        editTextHeight = (EditText) findViewById(R.id.editTextHeight);
+        edittextfeet = (EditText) findViewById(R.id.edittextFeet);
+        edittextInch = (EditText) findViewById(R.id.edittextInch);
+        editTextWeight = (EditText) findViewById(R.id.editTextWeight);
+        edittextWeightInLb = (EditText) findViewById(R.id.edittextWeightInLb);
+        edittextWeightInST = (EditText) findViewById(R.id.edittextWeightInST);
+        edittextWeightInSTLb = (EditText) findViewById(R.id.edittextWeightInSTLb);
+        imageViewGender = (ImageView) findViewById(R.id.imageViewGender);
+        imageViewHeight = (ImageView) findViewById(R.id.imageViewHeight);
+        imageViewWeight = (ImageView) findViewById(R.id.imageViewWeight);
+        buttonCalculate = (Button) findViewById(R.id.buttonCalculate);
+        buttonMoreInfo = (Button) findViewById(R.id.buttonMoreInfo);
+        textViewBoerLeanBodyMass = (TextView) findViewById(R.id.textViewBoerLeanBodyMass);
+        textViewJamesLeanBodyMass = (TextView) findViewById(R.id.textViewJamesLeanBodyMass);
+        textViewHumeLeanBodyMass= (TextView) findViewById(R.id.textViewHumeLeanBodyMass);
 
         buttonMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(LeanBodyMassCalculator.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -108,18 +90,17 @@ public class ProteinFragment extends Fragment {
                 IntroWebSettings.setUseWideViewPort(true);
                 IntroWebSettings.setLoadWithOverviewMode(true);
                 Introwebview.setWebViewClient(new WebViewClient());
-                Introwebview.loadUrl("file:///android_res/raw/protein.html");
+                Introwebview.loadUrl("file:///android_res/raw/leanbodymass.html");
                 alertDialogBuilderMoreInfo.setView(alertLayoutMoreInfo);
                 final AlertDialog alertDialogMoreInfo = alertDialogBuilderMoreInfo.create();
                 alertDialogMoreInfo.show();
             }
         });
 
-
         //alert Dialog Declaration For Gender
-        final LayoutInflater inflaterGender = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterGender = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutGender = inflaterGender.inflate(R.layout.dialog, null);
-        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderGender = new AlertDialog.Builder(LeanBodyMassCalculator.this);
         alertDialogBuilderGender.setTitle("Gender :");
         radioGroupSex = (RadioGroup) alertLayoutGender.findViewById(R.id.radioSex);
         alertDialogBuilderGender.setView(alertLayoutGender);
@@ -136,7 +117,7 @@ public class ProteinFragment extends Fragment {
                         alertDialogGender.cancel();
                         radioButtonSex = (RadioButton) alertLayoutGender.findViewById(radioGroup.getCheckedRadioButtonId());
                         //For Changing Button Image
-                        if (radioButtonSex.getText().toString().trim().equals("Male")) {
+                        if (radioButtonSex.getText().toString().trim().equals("Male") || radioButtonSex.getText().toString().trim().equals("")) {
                             imageViewGender.setImageResource(R.drawable.gender_m);
                         } else {
                             imageViewGender.setImageResource(R.drawable.gender_f);
@@ -150,9 +131,9 @@ public class ProteinFragment extends Fragment {
         });
 
         //alert Dialog Declaration for Height
-        final LayoutInflater inflaterHeight = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterHeight = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutHeight  = inflaterHeight.inflate(R.layout.dialogheight, null);
-        final AlertDialog.Builder alertDialogBuilderHeight = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderHeight = new AlertDialog.Builder(LeanBodyMassCalculator.this);
         alertDialogBuilderHeight.setTitle("Height In :");
         radioGroupHeight = (RadioGroup) alertLayoutHeight.findViewById(R.id.radioHeight);
         alertDialogBuilderHeight.setView(alertLayoutHeight);
@@ -193,9 +174,9 @@ public class ProteinFragment extends Fragment {
         });
 
         //alert Dialog Declaration for Weight
-        final LayoutInflater inflaterWeight = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflaterWeight = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View alertLayoutWeight  = inflaterWeight.inflate(R.layout.dialogweight, null);
-        final AlertDialog.Builder alertDialogBuilderWeight = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderWeight = new AlertDialog.Builder(LeanBodyMassCalculator.this);
         alertDialogBuilderWeight.setTitle("Weight In :");
         radioGroupWeight = (RadioGroup) alertLayoutWeight.findViewById(R.id.radioWeight);
         alertDialogBuilderWeight.setView(alertLayoutWeight);
@@ -241,65 +222,55 @@ public class ProteinFragment extends Fragment {
 
             }
         });
-
         //Calculating BMI and FAT
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //for hiding keyboard
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Default case Calculation
                 if (radioGroupSex.getCheckedRadioButtonId() == -1&& radioGroupHeight.getCheckedRadioButtonId() == -1 && radioGroupWeight.getCheckedRadioButtonId() == -1) {
                     //Validation for Edittext  if is blank
-                    if (editTextAge.getText().toString().equals("")) {
-                        editTextAge.setError("Enter Age");
-                    } else if (editTextHeight.getText().toString().equals("")) {
+                    if (editTextHeight.getText().toString().equals("")) {
                         editTextHeight.setError("Enter Height");
                     } else if (editTextWeight.getText().toString().equals("")) {
                         editTextWeight.setError("Enter Weight");
                     } else {
-                        calculateCalorie(Float.parseFloat(editTextHeight.getText().toString().trim()), Float.parseFloat(editTextWeight.getText().toString().trim()), Float.parseFloat(editTextAge.getText().toString().trim()),"Male",spinneractivity.getSelectedItem().toString().trim());
+                        calculateLeanBodyMass(Float.parseFloat(editTextHeight.getText().toString().trim()), Float.parseFloat(editTextWeight.getText().toString().trim()),"Male");
                     }
                 } else {
                     //Validation for radiobutton if not checked
                     if (radioGroupSex.getCheckedRadioButtonId() == -1 ){
-                        Toast.makeText(getActivity(), "Please Select Gender", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LeanBodyMassCalculator.this, "Please Select Gender", Toast.LENGTH_LONG).show();
                     } else if(radioGroupHeight.getCheckedRadioButtonId() == -1 ) {
-                        Toast.makeText(getActivity(), "Please Select Height Unit", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LeanBodyMassCalculator.this, "Please Select Height Unit", Toast.LENGTH_LONG).show();
                     }else if(radioGroupWeight.getCheckedRadioButtonId() == -1 ){
-                        Toast.makeText(getActivity(), "Please Select Weight Unit", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LeanBodyMassCalculator.this, "Please Select Weight Unit", Toast.LENGTH_LONG).show();
                     }
                     else {
                         if(radioButtonHeight.getText().toString().trim().equals("CM")) {
                             if(radioButtonWeight.getText().toString().trim().equals("KG")) {
                                 //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if (editTextHeight.getText().toString().equals("")) {
+                                if (editTextHeight.getText().toString().equals("")) {
                                     editTextHeight.setError("Enter Height");
                                 } else if (editTextWeight.getText().toString().equals("")) {
                                     editTextWeight.setError("Enter Weight");
                                 } else {
-                                    calculateCalorie(Float.parseFloat(editTextHeight.getText().toString().trim()), Float.parseFloat(editTextWeight.getText().toString().trim()), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim(),spinneractivity.getSelectedItem().toString().trim());
+                                    calculateLeanBodyMass(Float.parseFloat(editTextHeight.getText().toString().trim()), Float.parseFloat(editTextWeight.getText().toString().trim()), radioButtonSex.getText().toString().trim());
                                 }
                             } else if(radioButtonWeight.getText().toString().trim().equals("LB")) {
                                 //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if (editTextHeight.getText().toString().equals("")) {
+                                 if (editTextHeight.getText().toString().equals("")) {
                                     editTextHeight.setError("Enter Height");
                                 } else if (edittextWeightInLb.getText().toString().equals("")) {
                                     edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
                                 } else {
-                                    calculateCalorie(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim())* (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim(),spinneractivity.getSelectedItem().toString().trim());
+                                    calculateLeanBodyMass(Float.parseFloat(editTextHeight.getText().toString().trim()),(float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim())* (0.454)), radioButtonSex.getText().toString().trim());
                                 }
                             }
                             else {
-                                //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if (editTextHeight.getText().toString().equals("")) {
+                                if (editTextHeight.getText().toString().equals("")) {
                                     editTextHeight.setError("Enter Height");
                                 } else if (edittextWeightInST.getText().toString().equals("")) {
                                     edittextWeightInST.setError("Enter Weight in ST (Stone)");
@@ -307,41 +278,35 @@ public class ProteinFragment extends Fragment {
                                     edittextWeightInSTLb.setError("Enter Weight In Lb (Pounds)");
                                 }
                                 else {
-                                    calculateCalorie(Float.parseFloat(editTextHeight.getText().toString().trim()), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim()))*(6.350))+((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim()))*(0.454))), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim(),spinneractivity.getSelectedItem().toString().trim());
+                                    calculateLeanBodyMass(Float.parseFloat(editTextHeight.getText().toString().trim()), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim()))*(6.350))+((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim()))*(0.454))), radioButtonSex.getText().toString().trim());
                                 }
                             }
                         }else {
                             if (radioButtonWeight.getText().toString().trim().equals("KG")) {
                                 //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if(edittextfeet.getText().toString().equals("")){
+                                 if(edittextfeet.getText().toString().equals("")){
                                     edittextfeet.setError("Enter Feet");
                                 }else if(edittextInch.getText().toString().equals("")){
                                     edittextInch.setError("Enter Inch");
                                 }else if (editTextWeight.getText().toString().equals("")) {
                                     editTextWeight.setError("Enter Weight");
                                 } else {
-                                    calculateCalorie( (float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), Float.parseFloat(editTextWeight.getText().toString().trim()), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim(),spinneractivity.getSelectedItem().toString().trim());
+                                    calculateLeanBodyMass( (float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), Float.parseFloat(editTextWeight.getText().toString().trim()), radioButtonSex.getText().toString().trim());
                                 }
                             } else if (radioButtonWeight.getText().toString().trim().equals("LB")) {
                                 //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                }else if(edittextfeet.getText().toString().equals("")){
+                                 if(edittextfeet.getText().toString().equals("")){
                                     edittextfeet.setError("Enter Feet");
                                 }else if(edittextInch.getText().toString().equals("")){
                                     edittextInch.setError("Enter Inch");
                                 } else if (edittextWeightInLb.getText().toString().equals("")) {
                                     edittextWeightInLb.setError("Enter Weight In Lb (Pounds)");
                                 } else {
-                                    calculateCalorie((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim()) * (0.454)), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim(),spinneractivity.getSelectedItem().toString().trim());
+                                    calculateLeanBodyMass((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (Float.parseFloat(edittextWeightInLb.getText().toString().trim()) * (0.454)), radioButtonSex.getText().toString().trim());
                                 }
                             } else {
                                 //Validation for Edittext  if is blank
-                                if (editTextAge.getText().toString().equals("")) {
-                                    editTextAge.setError("Enter Age");
-                                } else if(edittextfeet.getText().toString().equals("")){
+                                if(edittextfeet.getText().toString().equals("")){
                                     edittextfeet.setError("Enter Feet");
                                 }else if(edittextInch.getText().toString().equals("")){
                                     edittextInch.setError("Enter Inch");
@@ -350,7 +315,7 @@ public class ProteinFragment extends Fragment {
                                 } else if (edittextWeightInSTLb.getText().toString().equals("")) {
                                     edittextWeightInSTLb.setError("Enter Weight In Lb (Pounds)");
                                 } else {
-                                    calculateCalorie((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim())) * (6.350)) + ((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim())) * (0.454))), Float.parseFloat(editTextAge.getText().toString().trim()), radioButtonSex.getText().toString().trim(),spinneractivity.getSelectedItem().toString().trim());
+                                    calculateLeanBodyMass((float) (((Float.parseFloat(edittextfeet.getText().toString().trim()))*(30.48))+((Float.parseFloat(edittextInch.getText().toString().trim()))*(2.54))), (float) (((Float.parseFloat(edittextWeightInST.getText().toString().trim())) * (6.350)) + ((Float.parseFloat(edittextWeightInSTLb.getText().toString().trim())) * (0.454))), radioButtonSex.getText().toString().trim());
                                 }
                             }
                         }
@@ -358,24 +323,23 @@ public class ProteinFragment extends Fragment {
                 }
             }
         });
-        getActivity().getWindow().setSoftInputMode(
+       getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        return v;
     }
 
 
-    public void calculateCalorie(float height,float weight,float age,String gender,String activity){
-        CalculateBMR calculateBMR = new CalculateBMR(height,weight, age, gender,activity);
-        float resultADA,resultCDC;
+    public  void calculateLeanBodyMass(float height,float weight,String gender){
+        CalulateLeanBodyMass calulateLeanBodyMass = new CalulateLeanBodyMass(height,weight, gender);
         DecimalFormat f = new DecimalFormat("##.00");
-
-        resultADA=calculateBMR.getWeight();
-        textViewADA.setText("Based on the weight, American Dietetic Association (ADA) recommend taking at least "+resultADA*0.8+" - "+resultADA*1+" grams of protein per day.");
-        resultCDC = calculateBMR.Sedentary() ;
-        textViewCDC.setText("Based on the conditions, Centers for Disease Control and Prevention (CDC) recommend taking "+f.format(((resultCDC/4.09)*10)/100)+" - "+f.format(((resultCDC/4.09)*35)/100)+" grams of protein per day, which is 10% - 35% of your daily Calorie intake.");
-
+        float resultLeanBodyMassBoer= calulateLeanBodyMass.calculateleanbodymasscalculaterBoer() ;
+        textViewBoerLeanBodyMass.setText(f.format(resultLeanBodyMassBoer)+" Kgs");
+        float resultLeanBodyMassJames= calulateLeanBodyMass.calculateleanbodymasscalculaterJames() ;
+        textViewJamesLeanBodyMass.setText(f.format(resultLeanBodyMassJames)+" Kgs");
+        float resultLeanBodyMassHume= calulateLeanBodyMass.calculateleanbodymasscalculaterHume() ;
+        textViewHumeLeanBodyMass.setText(f.format(resultLeanBodyMassHume)+" Kgs");
+        
     }
     public class WebViewClient extends android.webkit.WebViewClient {
 
@@ -383,5 +347,22 @@ public class ProteinFragment extends Fragment {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return super.shouldOverrideUrlLoading(view, url);
         }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(LeanBodyMassCalculator.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

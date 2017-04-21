@@ -1,6 +1,7 @@
 package com.nineinfosys.android.weightlosscalculators.Forum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,7 +24,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nineinfosys.android.weightlosscalculators.DashBord.DashBord;
 import com.nineinfosys.android.weightlosscalculators.LoginActivity.User;
+import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 import com.nineinfosys.android.weightlosscalculators.models.Comment;
 import com.nineinfosys.android.weightlosscalculators.models.Post;
@@ -56,6 +61,8 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Comments");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         // Get post key from intent
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         if (mPostKey == null) {
@@ -315,4 +322,21 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         }
 
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(PostDetailActivity.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

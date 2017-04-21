@@ -5,6 +5,7 @@ package com.nineinfosys.android.weightlosscalculators.Weight;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -30,13 +34,14 @@ import android.widget.Spinner;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.nineinfosys.android.weightlosscalculators.Carbohydrate.CarbohydrateCalculator;
 import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightLossConversionList extends Fragment {
+public class WeightLossConversionList extends AppCompatActivity {
     RecyclerView recyclerViewAmortization;
     WeightLossConversionAdapter weightLossConversionAdapter;
     int i=1;
@@ -48,22 +53,28 @@ public class WeightLossConversionList extends Fragment {
     String strConversiontype;
     WebView Introwebview;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_weight_conversion, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_weight_conversion);
 
-        MobileAds.initialize(getActivity(), getString(R.string.ads_app_id));
-        AdView mAdView = (AdView) v.findViewById(R.id.adViewMainPageWeight);
+        MobileAds.initialize(WeightLossConversionList.this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adViewMainPageWeight);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        ((MainActivityDrawer) getActivity()).toolbar.setTitle("Weight Conversion");
-        editTextvalue=(EditText)v.findViewById(R.id.edtvalue);
-        spinnerConversionType=(Spinner)v.findViewById(R.id.spinnerconversiontype);
-        buttonCalcualte=(Button)v.findViewById(R.id.buttonCalculate);
-        buttonMoreInfo = (Button) v.findViewById(R.id.buttonMoreInfo);
-        recyclerViewAmortization=(RecyclerView)v.findViewById(R.id.recyclerViewAmortization);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+
+       // ((MainActivityDrawer) WeightLossConversionList.this).toolbar.setTitle("Weight Conversion");
+        editTextvalue=(EditText)findViewById(R.id.edtvalue);
+        spinnerConversionType=(Spinner)findViewById(R.id.spinnerconversiontype);
+        buttonCalcualte=(Button)findViewById(R.id.buttonCalculate);
+        buttonMoreInfo = (Button) findViewById(R.id.buttonMoreInfo);
+        recyclerViewAmortization=(RecyclerView)findViewById(R.id.recyclerViewAmortization);
         recyclerViewAmortization.setHasFixedSize(true);
-        recyclerViewAmortization.setLayoutManager(new GridLayoutManager(getActivity(),1));
+        recyclerViewAmortization.setLayoutManager(new GridLayoutManager(WeightLossConversionList.this,1));
 
 
 
@@ -83,7 +94,7 @@ public class WeightLossConversionList extends Fragment {
         listConversiontype.add("Stone UK");
      //   listConversiontype.add("Atomic Mass Unit");
         // Creating adapter for spinner
-        ArrayAdapter<String> Adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listConversiontype);
+        ArrayAdapter<String> Adapter1 = new ArrayAdapter<String>(WeightLossConversionList.this, android.R.layout.simple_spinner_item, listConversiontype);
 
         // Drop down layout style - list view with radio button
         Adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,9 +105,9 @@ public class WeightLossConversionList extends Fragment {
             @Override
             public void onClick(View v) {
                 //alert Dialog Declaration For More Infomation
-                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflaterMoreInfo = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayoutMoreInfo = inflaterMoreInfo.inflate(R.layout.info_webview, null);
-                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder alertDialogBuilderMoreInfo = new AlertDialog.Builder(WeightLossConversionList.this);
                 alertDialogBuilderMoreInfo.setTitle("More Info:");
                 Introwebview = (WebView) alertLayoutMoreInfo.findViewById(R.id.webViewinfo);
                 WebSettings IntroWebSettings = Introwebview.getSettings();
@@ -115,8 +126,8 @@ public class WeightLossConversionList extends Fragment {
             @Override
             public void onClick(View view) {
                 //for hiding keyboard
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 if(editTextvalue.getText().toString().trim().equals("")){
                     editTextvalue.setError("Enter Value");
 
@@ -130,11 +141,11 @@ public class WeightLossConversionList extends Fragment {
 
 
 
-        getActivity().getWindow().setSoftInputMode(
+        getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
         //calculation method call for amortization
-       return  v;
+
     }
 
 
@@ -146,7 +157,7 @@ public class WeightLossConversionList extends Fragment {
         weightlossCalcualtion iA = new weightlossCalcualtion(edtextvalue,strConversiontype);
         results = iA.calculateWeightConversion();
       //  Log.d("Result", String.valueOf(results));
-        weightLossConversionAdapter = new WeightLossConversionAdapter(getActivity(),results,strConversiontype);
+        weightLossConversionAdapter = new WeightLossConversionAdapter(WeightLossConversionList.this,results,strConversiontype);
         recyclerViewAmortization.setAdapter(weightLossConversionAdapter);
 
 
@@ -169,5 +180,22 @@ public class WeightLossConversionList extends Fragment {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return super.shouldOverrideUrlLoading(view, url);
         }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(WeightLossConversionList.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

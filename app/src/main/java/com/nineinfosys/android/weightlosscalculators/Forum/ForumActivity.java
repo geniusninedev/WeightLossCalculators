@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.nineinfosys.android.weightlosscalculators.MainActivityDrawer;
 import com.nineinfosys.android.weightlosscalculators.R;
 import com.nineinfosys.android.weightlosscalculators.fragment.MyTopPostsFragment;
 import com.nineinfosys.android.weightlosscalculators.fragment.RecentPostsFragment;
@@ -30,6 +32,8 @@ public class ForumActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Forum");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         // Create the adapter that will return a fragment for each section
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[] {
@@ -66,5 +70,20 @@ public class ForumActivity extends BaseActivity {
                 startActivity(new Intent(ForumActivity.this, NewPostActivity.class));
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            Intent intent=new Intent(ForumActivity.this,MainActivityDrawer.class);
+            finish();
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
