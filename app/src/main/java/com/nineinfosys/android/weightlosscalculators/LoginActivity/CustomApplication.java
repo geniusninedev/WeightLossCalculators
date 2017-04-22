@@ -7,6 +7,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.firebase.client.Firebase;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 
 /**
  * Created by Supriya on 20-04-2017.

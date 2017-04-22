@@ -64,12 +64,14 @@
             android:configChanges="orientation|screenSize|keyboardHidden"></activity>
         <activity
             android:name=".Forum.NewPostActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="Add New Post">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".Forum.ForumActivity" /></activity>
         <activity
             android:name=".Forum.PostDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="Comment" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
