@@ -80,9 +80,9 @@ public class ForumActivity extends BaseActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            Intent intent=new Intent(ForumActivity.this,MainActivityDrawer.class);
+
             finish();
-            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

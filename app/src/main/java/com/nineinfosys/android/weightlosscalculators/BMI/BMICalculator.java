@@ -412,9 +412,9 @@ public class BMICalculator extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            Intent intent=new Intent(BMICalculator.this,MainActivityDrawer.class);
+
             finish();
-            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

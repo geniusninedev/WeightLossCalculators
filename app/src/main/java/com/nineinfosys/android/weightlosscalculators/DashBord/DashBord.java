@@ -207,11 +207,10 @@ public class DashBord extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            Intent intent=new Intent(DashBord.this,MainActivityDrawer.class);
+
             finish();
-            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

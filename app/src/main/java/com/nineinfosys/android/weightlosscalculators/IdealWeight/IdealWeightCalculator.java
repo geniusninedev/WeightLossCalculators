@@ -242,7 +242,6 @@ public class IdealWeightCalculator extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -251,9 +250,9 @@ public class IdealWeightCalculator extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            Intent intent=new Intent(IdealWeightCalculator.this,MainActivityDrawer.class);
+
             finish();
-            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

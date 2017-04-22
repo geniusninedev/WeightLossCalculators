@@ -374,9 +374,9 @@ public class BMRCalculator extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            Intent intent=new Intent(BMRCalculator.this,MainActivityDrawer.class);
+
             finish();
-            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }
