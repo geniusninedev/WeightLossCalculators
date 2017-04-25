@@ -1,5 +1,6 @@
 package com.nineinfosys.android.weightlosscalculators.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,11 +34,11 @@ public abstract class PostListFragment extends Fragment {
     // [START define_database_reference]
     private DatabaseReference mDatabase;
     // [END define_database_reference]
-
+    ProgressDialog progressDialog;
     private FirebaseRecyclerAdapter<Post, PostViewHolder> mAdapter;
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
-
+    ProgressDialog loading;
     public PostListFragment() {
     }
 
@@ -46,10 +48,12 @@ public abstract class PostListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_all_posts, container, false);
 
+
         // [START create_database_reference]
         mDatabase = FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Forum");
         // [END create_database_reference]
         mSwipeRefresh = (SwipeRefreshLayout)rootView.findViewById(R.id.swipeRefresh);
+
         mRecycler = (RecyclerView) rootView.findViewById(R.id.messages_list);
         mRecycler.setHasFixedSize(true);
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -58,6 +62,7 @@ public abstract class PostListFragment extends Fragment {
                 refreshItems();
             }
         });
+
         return rootView;
     }
 
@@ -74,13 +79,15 @@ public abstract class PostListFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
         // Set up Layout Manager, reverse layout
         mManager = new LinearLayoutManager(getActivity());
         mManager.setReverseLayout(true);
         mManager.setStackFromEnd(true);
         mRecycler.setLayoutManager(mManager);
-
-
+         //Showing a progress dialog while our app fetches the data from url
+        loading = ProgressDialog.show(getActivity(), "Please wait...","Fetching data...",false,false);
+     //   loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
         mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class, R.layout.item_post,
@@ -88,9 +95,9 @@ public abstract class PostListFragment extends Fragment {
             @Override
             protected void populateViewHolder(final PostViewHolder viewHolder, final Post model, final int position) {
 
+
+
                 final DatabaseReference postRef = getRef(position);
-
-
                 // Set click listener for the whole post view
                 final String postKey = postRef.getKey();
                 viewHolder.commentView.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +148,7 @@ public abstract class PostListFragment extends Fragment {
                         onStarClicked(userPostRef);
                     }
                 });
-
+                loading.dismiss();
                 mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
                     public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -159,12 +166,15 @@ public abstract class PostListFragment extends Fragment {
                         }
                     }
                 });
+
             }
 
         };
 
-        mRecycler.setAdapter(mAdapter);
 
+        mRecycler.setAdapter(mAdapter);
+        //Dismissing the progressdialog on response
+        //loading.dismiss();
     }
 
 

@@ -3,6 +3,7 @@ package com.nineinfosys.android.weightlosscalculators.viewholder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nineinfosys.android.weightlosscalculators.R;
@@ -32,7 +33,6 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         shareView = (Button) itemView.findViewById(R.id.share);
         time = (TextView) itemView.findViewById(R.id.post_time);
         date = (TextView) itemView.findViewById(R.id.post_date);
-
 
     }
 
