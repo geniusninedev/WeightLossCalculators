@@ -121,6 +121,8 @@ public abstract class PostListFragment extends Fragment {
                             Intent shareIntent = new Intent();
                             shareIntent.setAction("android.intent.action.SEND");
 
+
+
                             shareIntent.setType("text/plain");
                             Post post = (Post) mAdapter.getItem(viewHolder.getAdapterPosition());
                             shareIntent.putExtra("android.intent.extra.TEXT", post.title + "\n\n" + post.body);
