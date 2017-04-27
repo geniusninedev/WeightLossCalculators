@@ -18,4 +18,5 @@
         android:padding="5dp"
         tools:listitem="@layout/item_post" />
 </android.support.v4.widget.SwipeRefreshLayout>
+
 </FrameLayout>
