@@ -1,5 +1,6 @@
 package com.nineinfosys.android.weightlosscalculators.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 import com.nineinfosys.android.weightlosscalculators.Forum.PostDetailActivity;
 import com.nineinfosys.android.weightlosscalculators.R;
 import com.nineinfosys.android.weightlosscalculators.models.Post;
@@ -32,7 +34,7 @@ public abstract class PostListFragment extends Fragment {
     // [START define_database_reference]
     private DatabaseReference mDatabase;
     // [END define_database_reference]
-
+    ProgressDialog loading;
     private FirebaseRecyclerAdapter<Post, PostViewHolder> mAdapter;
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
@@ -46,19 +48,25 @@ public abstract class PostListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_all_posts, container, false);
 
+
+    //    loading.setProgress(3);
+
         // [START create_database_reference]
         mDatabase = FirebaseDatabase.getInstance().getReference().child(getString(R.string.app_id)).child("Forum");
         // [END create_database_reference]
         mSwipeRefresh = (SwipeRefreshLayout)rootView.findViewById(R.id.swipeRefresh);
         mRecycler = (RecyclerView) rootView.findViewById(R.id.messages_list);
         mRecycler.setHasFixedSize(true);
+
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshItems();
             }
         });
+
         return rootView;
+
     }
 
     void refreshItems() {
@@ -80,19 +88,22 @@ public abstract class PostListFragment extends Fragment {
         mManager.setStackFromEnd(true);
         mRecycler.setLayoutManager(mManager);
 
-
+        loading = ProgressDialog.show(getActivity(), "Please wait...","Fetching data...",false,false);
         // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
+
         mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class, R.layout.item_post,
                 PostViewHolder.class, postsQuery) {
             @Override
             protected void populateViewHolder(final PostViewHolder viewHolder, final Post model, final int position) {
+
 
                 final DatabaseReference postRef = getRef(position);
 
 
                 // Set click listener for the whole post view
                 final String postKey = postRef.getKey();
+
                 viewHolder.commentView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -142,10 +153,13 @@ public abstract class PostListFragment extends Fragment {
                     }
                 });
 
+
+
                 mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                     @Override
                     public void onItemRangeInserted(int positionStart, int itemCount) {
                         super.onItemRangeInserted(positionStart, itemCount);
+
                         int friendlyMessageCount = mAdapter.getItemCount();
                         int lastVisiblePosition =
                                 mManager.findLastCompletelyVisibleItemPosition();
@@ -159,9 +173,26 @@ public abstract class PostListFragment extends Fragment {
                         }
                     }
                 });
+
+
+
+
             }
 
+
+
         };
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                loading.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         mRecycler.setAdapter(mAdapter);
 
@@ -214,6 +245,7 @@ public abstract class PostListFragment extends Fragment {
 
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
+
     }
 
     public abstract Query getQuery(DatabaseReference databaseReference);

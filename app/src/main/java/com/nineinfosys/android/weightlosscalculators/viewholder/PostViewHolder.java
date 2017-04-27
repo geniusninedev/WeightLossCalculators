@@ -1,5 +1,7 @@
 package com.nineinfosys.android.weightlosscalculators.viewholder;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +22,11 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     public TextView time;
     public TextView date;
 
+    public Context context;
+
     public PostViewHolder(View itemView) {
         super(itemView);
+
 
         titleView = (TextView) itemView.findViewById(R.id.post_title);
         authorView = (TextView) itemView.findViewById(R.id.post_author);
@@ -44,6 +49,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         time.setText(post.messageTime);
         date.setText(post.messageDate);
         likeView.setOnClickListener(starClickListener);
+
     }
 
 
