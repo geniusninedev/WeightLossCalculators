@@ -9,6 +9,16 @@
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical" >
     <EditText
         android:id="@+id/field_title"
         android:layout_width="match_parent"
@@ -49,5 +59,6 @@
         android:layout_alignLeft="@+id/field_body"
         android:layout_alignStart="@+id/field_body" /> /
     >
-
+</LinearLayout>
+    </ScrollView>
 </RelativeLayout>

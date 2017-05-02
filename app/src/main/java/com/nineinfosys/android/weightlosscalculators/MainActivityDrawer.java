@@ -106,8 +106,9 @@ public class MainActivityDrawer extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  Toast.makeText(MainActivityDrawer.this,"This Is Under Consturtion", Toast.LENGTH_LONG).show();
+
                 startActivity(new Intent(MainActivityDrawer.this, ForumActivity.class));
+
                 /*Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
                 startActivity(intent);*/
             }
