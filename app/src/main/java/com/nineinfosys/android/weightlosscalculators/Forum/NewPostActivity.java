@@ -117,6 +117,7 @@ public class NewPostActivity extends BaseActivity {
 
                         // Finish this Activity, back to the stream
                         setEditingEnabled(true);
+                        startActivity(new Intent(NewPostActivity.this,ForumActivity.class));
                         finish();
                         // [END_EXCLUDE]
                     }
@@ -160,7 +161,7 @@ public class NewPostActivity extends BaseActivity {
 
 
 
-    @Override
+   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -168,11 +169,17 @@ public class NewPostActivity extends BaseActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            Intent intent=new Intent(NewPostActivity.this,MainActivityDrawer.class);
+            Intent intent=new Intent(NewPostActivity.this,ForumActivity.class);
             finish();
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(NewPostActivity.this,ForumActivity.class);
+        finish();
+        startActivity(intent);
+    }
 }
